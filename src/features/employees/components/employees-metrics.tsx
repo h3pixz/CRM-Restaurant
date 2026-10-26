@@ -28,7 +28,7 @@ export function EmployeesMetrics({ metrics }: EmployeesMetricsProps) {
             <Button
               type="button"
               variant="outline"
-              className="h-7 rounded-md border-neutral-200/50 bg-white px-4 text-xs font-medium text-neutral-800 shadow-sm hover:bg-neutral-50"
+              className="h-7 rounded-md border-neutral-200/50 bg-white px-4 text-xs font-medium text-neutral-800 shadow-sm hover:bg-neutral-50 cursor-pointer"
             >
               View
             </Button>
