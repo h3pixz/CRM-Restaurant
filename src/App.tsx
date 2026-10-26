@@ -1,7 +1,9 @@
+import { Button } from '@/components/ui/button'
+
 function App() {
   return (
-    <main>
-      <h1>CRM</h1>
+    <main className="flex min-h-svh items-center justify-center">
+      <Button>CRM</Button>
     </main>
   )
 }
