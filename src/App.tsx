@@ -1,11 +1,7 @@
-import { Button } from '@/components/ui/button'
+import { EmployeesPage } from '@/features/employees'
 
 function App() {
-  return (
-    <main className="flex min-h-svh items-center justify-center">
-      <Button>CRM</Button>
-    </main>
-  )
+  return <EmployeesPage />
 }
 
 export default App
