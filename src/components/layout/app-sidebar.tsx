@@ -1,32 +1,5 @@
-import {
-  BriefcaseBusiness,
-  CalendarDays,
-  ChartLine,
-  CreditCard,
-  HeartPulse,
-  Home,
-  ListTree,
-  Users,
-  type LucideIcon,
-} from 'lucide-react'
-import { cn } from '@/lib/utils'
-
-interface NavItem {
-  label: string
-  icon: LucideIcon
-  active?: boolean
-}
-
-const NAV_ITEMS: readonly NavItem[] = [
-  { label: 'Home', icon: Home },
-  { label: 'Shift', icon: CalendarDays },
-  { label: 'Payroll', icon: CreditCard },
-  { label: 'Tasks', icon: ListTree },
-  { label: 'Analytics', icon: ChartLine },
-  { label: 'Employees', icon: Users, active: true },
-  { label: 'Vacation', icon: BriefcaseBusiness },
-  { label: 'Sick days', icon: HeartPulse },
-]
+import { Link } from '@tanstack/react-router'
+import { NAV_ITEMS } from '@/app/navigation'
 
 export function AppSidebar() {
   return (
@@ -39,25 +12,29 @@ export function AppSidebar() {
       </div>
 
       <nav aria-label="Main navigation" className="flex-1 space-y-2">
-        {NAV_ITEMS.map(({ label, icon: Icon, active }) => (
-          <a
-            key={label}
-            href="#"
-            aria-current={active ? 'page' : undefined}
-            className={cn(
-              'flex items-center gap-3.5 rounded-xl px-4 py-3 text-[15px] font-medium transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none',
-              active
-                ? 'bg-primary text-primary-foreground shadow-sm'
-                : 'text-neutral-700 hover:bg-neutral-200/60',
-            )}
+        {NAV_ITEMS.map(({ label, to, icon: Icon }) => (
+          <Link
+            key={to}
+            to={to}
+            activeOptions={{ exact: to === '/' }}
+            className="flex items-center gap-3.5 rounded-xl px-4 py-3 text-[15px] font-medium transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+            activeProps={{
+              className: 'bg-primary text-primary-foreground shadow-sm',
+              'aria-current': 'page',
+            }}
+            inactiveProps={{ className: 'text-neutral-700 hover:bg-neutral-200/60' }}
           >
-            <Icon
-              aria-hidden="true"
-              strokeWidth={1.8}
-              className={cn('size-5 shrink-0', active ? 'text-white' : 'text-neutral-500')}
-            />
-            <span>{label}</span>
-          </a>
+            {({ isActive }) => (
+              <>
+                <Icon
+                  aria-hidden="true"
+                  strokeWidth={1.8}
+                  className={isActive ? 'size-5 shrink-0 text-white' : 'size-5 shrink-0 text-neutral-500'}
+                />
+                <span>{label}</span>
+              </>
+            )}
+          </Link>
         ))}
       </nav>
     </aside>
