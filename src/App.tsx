@@ -1,7 +1,8 @@
-import { EmployeesPage } from '@/features/employees'
+import { RouterProvider } from '@tanstack/react-router'
+import { router } from '@/app/router'
 
 function App() {
-  return <EmployeesPage />
+  return <RouterProvider router={router} />
 }
 
 export default App
