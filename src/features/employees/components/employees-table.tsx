@@ -6,7 +6,9 @@ import type { Employee } from '../types/employee'
 import { EmployeeShiftBadge } from './employee-shift-badge'
 
 interface EmployeesTableProps {
-  employees: readonly Employee[]
+  readonly employees: readonly Employee[]
+  readonly emptyMessage: string
+  readonly onAddBonus: (employee: Employee) => void
 }
 
 function getInitials(name: string): string {
@@ -17,7 +19,7 @@ function getInitials(name: string): string {
     .join('')
 }
 
-export function EmployeesTable({ employees }: EmployeesTableProps) {
+export function EmployeesTable({ employees, emptyMessage, onAddBonus }: EmployeesTableProps) {
   return (
     <div className="w-full overflow-x-auto">
       <table className="w-full min-w-[720px] border-collapse text-left">
@@ -49,6 +51,14 @@ export function EmployeesTable({ employees }: EmployeesTableProps) {
         </thead>
 
         <tbody className="text-sm">
+          {employees.length === 0 && (
+            <tr>
+              <td colSpan={6} className="px-4 py-12 text-center text-sm text-neutral-500">
+                {emptyMessage}
+              </td>
+            </tr>
+          )}
+
           {employees.map((employee) => (
             <tr
               key={employee.id}
@@ -93,6 +103,7 @@ export function EmployeesTable({ employees }: EmployeesTableProps) {
                   variant="secondary"
                   size="icon-xs"
                   aria-label={`Add bonus for ${employee.name}`}
+                  onClick={() => onAddBonus(employee)}
                   className="size-6 rounded-full bg-neutral-200/70 text-neutral-800 hover:bg-neutral-300"
                 >
                   <Plus aria-hidden="true" className="size-3.5" strokeWidth={2.5} />

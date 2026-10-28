@@ -1,9 +1,15 @@
 import { Funnel, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 
-export function EmployeesToolbar() {
+interface EmployeesToolbarProps {
+  readonly search: string
+  readonly onSearchChange: (value: string) => void
+}
+
+export function EmployeesToolbar({ search, onSearchChange }: EmployeesToolbarProps) {
   return (
-    <div className="mb-4 flex items-center justify-between">
+    <div className="mb-4 flex items-center justify-between gap-3">
       <Button
         type="button"
         variant="secondary"
@@ -13,15 +19,21 @@ export function EmployeesToolbar() {
         Filters
       </Button>
 
-      <Button
-        type="button"
-        variant="secondary"
-        size="icon-sm"
-        aria-label="Search"
-        className="rounded-md text-neutral-700 hover:bg-neutral-300/80"
-      >
-        <Search aria-hidden="true" className="size-4 text-neutral-600" strokeWidth={2} />
-      </Button>
+      <div className="relative w-full max-w-64">
+        <Search
+          aria-hidden="true"
+          className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-neutral-500"
+          strokeWidth={2}
+        />
+        <Input
+          type="search"
+          value={search}
+          onChange={(event) => onSearchChange(event.target.value)}
+          placeholder="Search by name or email"
+          aria-label="Search employees"
+          className="h-8 rounded-md border-neutral-200 bg-white pr-3 pl-8 text-xs shadow-xs placeholder:text-neutral-400"
+        />
+      </div>
     </div>
   )
 }
