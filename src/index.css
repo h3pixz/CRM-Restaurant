@@ -38,6 +38,8 @@
   --sidebar-ring: #a3a3a3;
   --shift-a: #fca240;
   --shift-b: #82b1ff;
+  --brand: #f85858;
+  --brand-hover: #e64949;
 }
 
 .dark {
@@ -114,6 +116,8 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --color-shift-a: var(--shift-a);
   --color-shift-b: var(--shift-b);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
 }
 
 @layer base {
@@ -124,4 +128,51 @@
   body {
     @apply bg-background text-foreground antialiased;
   }
+}
+
+.restaurant-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #e2e8f0 transparent;
+}
+
+.restaurant-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.restaurant-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.restaurant-scroll::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 4px;
+}
+
+.leaflet-container {
+  font-family: inherit;
+  background: #f7f7f7;
+}
+
+.leaflet-container .leaflet-control-attribution {
+  font-size: 9px;
+}
+
+.restaurant-map-tiles {
+  filter: grayscale(1) contrast(0.92) brightness(1.06);
+}
+
+.restaurant-map-tooltip {
+  border: 0;
+  border-radius: 4px;
+  background: rgb(255 255 255 / 80%);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 12%);
+  padding: 1px 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #1f2937;
+  white-space: nowrap;
+}
+
+.restaurant-map-tooltip::before {
+  display: none;
 }

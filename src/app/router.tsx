@@ -4,6 +4,7 @@ import { appLayoutRoute } from '@/routes/app-layout-route'
 import { employeesRoute } from '@/routes/employees'
 import { homeRoute } from '@/routes/home'
 import { payrollRoute } from '@/routes/payroll'
+import { restaurantsRoute } from '@/routes/restaurants'
 import { rootRoute } from '@/routes/root-route'
 import { shiftRoute } from '@/routes/shift'
 import { sickDaysRoute } from '@/routes/sick-days'
@@ -21,6 +22,7 @@ const routeTree = rootRoute.addChildren([
     vacationRoute,
     sickDaysRoute,
   ]),
+  restaurantsRoute,
 ])
 
 export const router = createRouter({ routeTree, defaultPreload: 'intent' })
