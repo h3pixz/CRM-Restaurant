@@ -1,9 +1,9 @@
 import { createRoute } from '@tanstack/react-router'
 import { EmployeesPage } from '@/features/employees'
-import { rootRoute } from './root-route'
+import { appLayoutRoute } from './app-layout-route'
 
 export const employeesRoute = createRoute({
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => appLayoutRoute,
   path: '/employees',
   component: EmployeesPage,
 })

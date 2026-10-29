@@ -1,9 +1,9 @@
 import { createRoute } from '@tanstack/react-router'
 import { SectionPlaceholder } from '@/components/layout/section-placeholder'
-import { rootRoute } from './root-route'
+import { appLayoutRoute } from './app-layout-route'
 
 export const sickDaysRoute = createRoute({
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => appLayoutRoute,
   path: '/sick-days',
   component: SectionPlaceholder,
 })

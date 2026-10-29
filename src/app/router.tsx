@@ -1,5 +1,6 @@
 import { createRouter } from '@tanstack/react-router'
 import { analyticsRoute } from '@/routes/analytics'
+import { appLayoutRoute } from '@/routes/app-layout-route'
 import { employeesRoute } from '@/routes/employees'
 import { homeRoute } from '@/routes/home'
 import { payrollRoute } from '@/routes/payroll'
@@ -10,14 +11,16 @@ import { tasksRoute } from '@/routes/tasks'
 import { vacationRoute } from '@/routes/vacation'
 
 const routeTree = rootRoute.addChildren([
-  homeRoute,
-  shiftRoute,
-  payrollRoute,
-  tasksRoute,
-  analyticsRoute,
-  employeesRoute,
-  vacationRoute,
-  sickDaysRoute,
+  appLayoutRoute.addChildren([
+    homeRoute,
+    shiftRoute,
+    payrollRoute,
+    tasksRoute,
+    analyticsRoute,
+    employeesRoute,
+    vacationRoute,
+    sickDaysRoute,
+  ]),
 ])
 
 export const router = createRouter({ routeTree, defaultPreload: 'intent' })
