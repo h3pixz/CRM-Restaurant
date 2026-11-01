@@ -6,6 +6,7 @@ import {
   HeartPulse,
   Home,
   ListTree,
+  MessageCircle,
   Users,
   type LucideIcon,
 } from 'lucide-react'
@@ -23,6 +24,7 @@ export const NAV_ITEMS = [
   { label: 'Tasks', to: '/tasks', icon: ListTree },
   { label: 'Analytics', to: '/analytics', icon: ChartLine },
   { label: 'Employees', to: '/employees', icon: Users },
+  { label: 'Chat', to: '/chat', icon: MessageCircle },
   { label: 'Vacation', to: '/vacation', icon: BriefcaseBusiness },
   { label: 'Sick days', to: '/sick-days', icon: HeartPulse },
 ] as const satisfies readonly NavItem[]

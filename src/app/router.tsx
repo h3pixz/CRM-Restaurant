@@ -1,6 +1,7 @@
 import { createRouter } from '@tanstack/react-router'
 import { analyticsRoute } from '@/routes/analytics'
 import { appLayoutRoute } from '@/routes/app-layout-route'
+import { chatRoute } from '@/routes/chat'
 import { employeesRoute } from '@/routes/employees'
 import { homeRoute } from '@/routes/home'
 import { payrollRoute } from '@/routes/payroll'
@@ -19,6 +20,7 @@ const routeTree = rootRoute.addChildren([
     tasksRoute,
     analyticsRoute,
     employeesRoute,
+    chatRoute,
     vacationRoute,
     sickDaysRoute,
   ]),
