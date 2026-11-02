@@ -7,6 +7,7 @@ import {
   Home,
   ListTree,
   MessageCircle,
+  Table2,
   Users,
   type LucideIcon,
 } from 'lucide-react'
@@ -24,11 +25,20 @@ export const NAV_ITEMS = [
   { label: 'Tasks', to: '/tasks', icon: ListTree },
   { label: 'Analytics', to: '/analytics', icon: ChartLine },
   { label: 'Employees', to: '/employees', icon: Users },
+  { label: 'Tables', to: '/tables', icon: Table2 },
   { label: 'Chat', to: '/chat', icon: MessageCircle },
   { label: 'Vacation', to: '/vacation', icon: BriefcaseBusiness },
   { label: 'Sick days', to: '/sick-days', icon: HeartPulse },
 ] as const satisfies readonly NavItem[]
 
 export function getNavItemByPath(pathname: string): NavItem | undefined {
-  return NAV_ITEMS.find((item) => item.to === pathname)
+  const exactMatch = NAV_ITEMS.find((item) => item.to === pathname)
+
+  if (exactMatch) {
+    return exactMatch
+  }
+
+  return NAV_ITEMS.filter(
+    (item) => item.to !== '/' && pathname.startsWith(`${item.to}/`),
+  ).sort((left, right) => right.to.length - left.to.length)[0]
 }
