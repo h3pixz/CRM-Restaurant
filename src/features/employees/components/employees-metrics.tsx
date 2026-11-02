@@ -49,7 +49,8 @@ export function EmployeesMetrics({
                 onClick={() => onFilterChange(metric.key)}
                 className={cn(
                   'h-7 rounded-md border-neutral-200/50 bg-white px-4 text-xs font-medium text-neutral-800 shadow-sm hover:bg-neutral-50',
-                  isActive && 'border-neutral-900 bg-neutral-900 text-white hover:bg-neutral-800',
+                  isActive &&
+                    'border-neutral-900 bg-neutral-900 text-white hover:bg-neutral-800 hover:text-white',
                 )}
               >
                 View
