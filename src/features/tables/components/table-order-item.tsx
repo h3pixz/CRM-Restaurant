@@ -1,5 +1,4 @@
 import { CircleX, MessageSquare, Minus, Plus } from 'lucide-react'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { formatCurrency } from '@/utils/format-currency'
 import type { OrderItem } from '../types/order'
@@ -31,20 +30,14 @@ export function TableOrderItem({
         />
       </div>
 
-      <div className="flex min-w-0 items-center gap-3 md:col-span-5">
-        <Avatar className="size-9">
-          <AvatarImage src={item.imageUrl} alt="" />
-          <AvatarFallback>{item.name.charAt(0)}</AvatarFallback>
-        </Avatar>
-        <div className="min-w-0">
-          <p className="truncate text-sm font-medium text-neutral-800">{item.name}</p>
-          <p className="text-[11px] text-neutral-500 md:hidden">
-            {formatCurrency(item.price)}
-          </p>
-          {item.note && (
-            <p className="truncate text-[11px] text-neutral-400">{item.note}</p>
-          )}
-        </div>
+      <div className="min-w-0 md:col-span-5">
+        <p className="truncate text-sm font-medium text-neutral-800">{item.name}</p>
+        <p className="text-[11px] text-neutral-500 md:hidden">
+          {formatCurrency(item.price)}
+        </p>
+        {item.note && (
+          <p className="truncate text-[11px] text-neutral-400">{item.note}</p>
+        )}
       </div>
 
       <div className="hidden text-sm font-medium text-neutral-800 md:col-span-2 md:block">
