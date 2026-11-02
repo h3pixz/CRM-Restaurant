@@ -10,7 +10,7 @@ import {
 } from './table-order-feedback'
 
 export function TableOrderPage() {
-  const { tableId } = useParams({ from: '/_app/tables/$tableId' })
+  const { tableId } = useParams({ from: '/_admin/tables/$tableId' })
   const tableQuery = useTableQuery(tableId)
   const orderQuery = useTableOrderQuery(tableId)
 

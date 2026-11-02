@@ -45,6 +45,8 @@ export function TablesPage() {
 
   return (
     <>
+      <h2 className="mb-6 text-[28px] leading-tight font-bold text-neutral-900">Tables</h2>
+
       <TablesMetrics
         metrics={metrics}
         activeFilter={filter}

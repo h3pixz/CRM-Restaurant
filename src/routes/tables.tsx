@@ -1,9 +1,9 @@
 import { createRoute } from '@tanstack/react-router'
 import { TablesPage } from '@/features/tables'
-import { appLayoutRoute } from './app-layout-route'
+import { adminLayoutRoute } from './admin-layout-route'
 
 export const tablesRoute = createRoute({
-  getParentRoute: () => appLayoutRoute,
+  getParentRoute: () => adminLayoutRoute,
   path: '/tables',
   component: TablesPage,
 })
