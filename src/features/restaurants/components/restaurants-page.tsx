@@ -1,17 +1,23 @@
 import { useState } from 'react'
-import { RESTAURANTS } from '../data/restaurants'
+import { useRestaurantsQuery } from '../api'
 import { useRestaurantFilters } from '../hooks/use-restaurant-filters'
-import type { OrderMode } from '../types/restaurant'
+import type { OrderMode, Restaurant } from '../types/restaurant'
+import { RestaurantsError, RestaurantsLoading } from './restaurants-feedback'
 import { RestaurantsHeader } from './restaurants-header'
 import { RestaurantsMap } from './restaurants-map'
 import { RestaurantsSidebar } from './restaurants-sidebar'
 
+const EMPTY_RESTAURANTS: readonly Restaurant[] = []
+
 export function RestaurantsPage() {
   const [mode, setMode] = useState<OrderMode>('delivery')
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const restaurantsQuery = useRestaurantsQuery()
+
+  const restaurants = restaurantsQuery.data ?? EMPTY_RESTAURANTS
 
   const { activeCuisines, search, setSearch, toggleCuisine, visibleRestaurants } =
-    useRestaurantFilters(RESTAURANTS)
+    useRestaurantFilters(restaurants)
 
   function handleSelect(id: string) {
     setSelectedId(id)
@@ -19,6 +25,11 @@ export function RestaurantsPage() {
       .getElementById(`restaurant-card-${id}`)
       ?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
   }
+
+  const emptyMessage =
+    restaurants.length === 0
+      ? 'No restaurants yet. Add documents to the "restaurants" collection in Firestore.'
+      : 'No restaurants match the current filters.'
 
   return (
     <div className="flex h-dvh flex-col overflow-hidden bg-[#f8f9fa] text-slate-800 selection:bg-brand selection:text-white">
@@ -41,13 +52,31 @@ export function RestaurantsPage() {
           />
         </section>
 
-        <RestaurantsSidebar
-          restaurants={visibleRestaurants}
-          activeCuisines={activeCuisines}
-          onToggleCuisine={toggleCuisine}
-          selectedId={selectedId}
-          onSelect={handleSelect}
-        />
+        {restaurantsQuery.isPending && <RestaurantsLoading />}
+
+        {restaurantsQuery.isError && (
+          <RestaurantsError
+            message={
+              restaurantsQuery.error instanceof Error
+                ? restaurantsQuery.error.message
+                : 'Unexpected error while loading restaurants.'
+            }
+            onRetry={() => {
+              void restaurantsQuery.refetch()
+            }}
+          />
+        )}
+
+        {restaurantsQuery.isSuccess && (
+          <RestaurantsSidebar
+            restaurants={visibleRestaurants}
+            activeCuisines={activeCuisines}
+            onToggleCuisine={toggleCuisine}
+            selectedId={selectedId}
+            onSelect={handleSelect}
+            emptyMessage={emptyMessage}
+          />
+        )}
       </main>
     </div>
   )

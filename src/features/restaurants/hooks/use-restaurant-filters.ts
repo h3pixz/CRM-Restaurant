@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { CUISINE_FILTERS } from '../data/restaurants'
+import { CUISINE_FILTERS } from '../constants'
 import type { Restaurant } from '../types/restaurant'
 
 const INITIAL_CUISINES: readonly string[] = [...CUISINE_FILTERS]

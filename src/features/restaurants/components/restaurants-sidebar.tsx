@@ -1,6 +1,6 @@
 import { Filter, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { CUISINE_FILTERS } from '../data/restaurants'
+import { CUISINE_FILTERS } from '../constants'
 import type { Restaurant } from '../types/restaurant'
 import { RestaurantCard } from './restaurant-card'
 
@@ -10,6 +10,7 @@ interface RestaurantsSidebarProps {
   readonly onToggleCuisine: (cuisine: string) => void
   readonly selectedId: string | null
   readonly onSelect: (id: string) => void
+  readonly emptyMessage: string
 }
 
 export function RestaurantsSidebar({
@@ -18,6 +19,7 @@ export function RestaurantsSidebar({
   onToggleCuisine,
   selectedId,
   onSelect,
+  emptyMessage,
 }: RestaurantsSidebarProps) {
   return (
     <aside className="order-2 flex min-h-0 flex-1 flex-col border-t border-gray-200/90 bg-[#fbfbfc] lg:order-1 lg:w-[365px] lg:flex-none lg:border-t-0 lg:border-r">
@@ -54,7 +56,7 @@ export function RestaurantsSidebar({
       <div className="restaurant-scroll flex-1 space-y-3 overflow-y-auto p-3">
         {restaurants.length === 0 ? (
           <p className="px-2 py-12 text-center text-sm text-gray-500">
-            No restaurants match the current filters.
+            {emptyMessage}
           </p>
         ) : (
           restaurants.map((restaurant) => (
