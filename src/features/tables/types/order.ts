@@ -2,6 +2,13 @@ export const ORDER_CATEGORIES = ['appetizer', 'main', 'drinks', 'dessert'] as co
 
 export type OrderCategory = (typeof ORDER_CATEGORIES)[number]
 
+export const ORDER_CATEGORY_LABELS: Record<OrderCategory, string> = {
+  appetizer: 'Appetizers',
+  main: 'Main courses',
+  drinks: 'Drinks',
+  dessert: 'Desserts',
+}
+
 export interface OrderItem {
   readonly id: string
   readonly name: string
