@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { cn } from '@/lib/utils'
 import { formatShortDate } from '@/utils/format-date'
-import type { Task } from '../types/task'
+import type { Task, TaskStatus } from '../types/task'
 import {
   TASK_CATEGORY_LABELS,
   TASK_CATEGORY_STYLES,
@@ -12,9 +12,8 @@ import {
 
 interface TasksListProps {
   readonly tasks: readonly Task[]
-  readonly doneIds: ReadonlySet<string>
   readonly emptyMessage: string
-  readonly onToggle: (taskId: string) => void
+  readonly onToggle: (taskId: string, status: TaskStatus) => void
 }
 
 function getInitials(name: string): string {
@@ -25,7 +24,7 @@ function getInitials(name: string): string {
     .join('')
 }
 
-export function TasksList({ tasks, doneIds, emptyMessage, onToggle }: TasksListProps) {
+export function TasksList({ tasks, emptyMessage, onToggle }: TasksListProps) {
   return (
     <section aria-label="Task list" className="overflow-hidden rounded-2xl border border-neutral-100 bg-card">
       <div className="flex items-center justify-between border-b border-neutral-100 px-5 py-4">
@@ -38,7 +37,7 @@ export function TasksList({ tasks, doneIds, emptyMessage, onToggle }: TasksListP
       ) : (
         <ul className="divide-y divide-neutral-100">
           {tasks.map((task) => {
-            const isDone = doneIds.has(task.id)
+            const isDone = task.status === 'done'
 
             return (
               <li
@@ -48,7 +47,7 @@ export function TasksList({ tasks, doneIds, emptyMessage, onToggle }: TasksListP
                 <input
                   type="checkbox"
                   checked={isDone}
-                  onChange={() => onToggle(task.id)}
+                  onChange={() => onToggle(task.id, isDone ? 'open' : 'done')}
                   aria-label={isDone ? `Mark "${task.title}" as open` : `Mark "${task.title}" as done`}
                   className="mt-1 size-4 shrink-0 cursor-pointer accent-neutral-900"
                 />

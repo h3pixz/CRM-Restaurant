@@ -6,7 +6,9 @@ export const TASK_PRIORITIES = ['high', 'medium', 'low'] as const
 
 export type TaskPriority = (typeof TASK_PRIORITIES)[number]
 
-export type TaskStatus = 'open' | 'done'
+export const TASK_STATUSES = ['open', 'done'] as const
+
+export type TaskStatus = (typeof TASK_STATUSES)[number]
 
 export type TaskFilter = 'all' | TaskStatus
 
@@ -17,4 +19,5 @@ export interface Task {
   readonly priority: TaskPriority
   readonly assignee: string
   readonly dueDate: string
+  readonly status: TaskStatus
 }

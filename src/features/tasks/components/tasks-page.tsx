@@ -1,53 +1,58 @@
 import { useCallback, useMemo, useState } from 'react'
-import { TASKS } from '../data/tasks'
-import type { Task, TaskFilter, TaskPriority } from '../types/task'
+import { useSetTaskStatus, useTasksQuery } from '../api'
+import type { Task, TaskFilter, TaskPriority, TaskStatus } from '../types/task'
 import { TASK_FILTERS, TASK_FILTER_LABELS } from './task-meta'
+import { TasksError, TasksLoading } from './tasks-feedback'
 import { TasksList } from './tasks-list'
 import { TasksMetrics, type TaskMetric } from './tasks-metrics'
 import { TasksToolbar } from './tasks-toolbar'
 
 const PRIORITY_RANK: Record<TaskPriority, number> = { high: 0, medium: 1, low: 2 }
 
+const EMPTY_TASKS: readonly Task[] = []
+
 export function TasksPage() {
+  const tasksQuery = useTasksQuery()
+  const { mutate: setTaskStatus } = useSetTaskStatus()
   const [filter, setFilter] = useState<TaskFilter>('all')
   const [search, setSearch] = useState('')
-  const [doneIds, setDoneIds] = useState<ReadonlySet<string>>(() => new Set())
+
+  const tasks = tasksQuery.data ?? EMPTY_TASKS
 
   const metrics = useMemo<readonly TaskMetric[]>(() => {
-    const doneCount = TASKS.filter((task) => doneIds.has(task.id)).length
+    const doneCount = tasks.filter((task) => task.status === 'done').length
 
     return TASK_FILTERS.map((key) => ({
       key,
       label: TASK_FILTER_LABELS[key],
-      value: key === 'all' ? TASKS.length : key === 'done' ? doneCount : TASKS.length - doneCount,
+      value: key === 'all' ? tasks.length : key === 'done' ? doneCount : tasks.length - doneCount,
     }))
-  }, [doneIds])
+  }, [tasks])
 
   const visibleTasks = useMemo<readonly Task[]>(() => {
     const normalizedSearch = search.trim().toLowerCase()
 
-    return TASKS.filter((task) => {
-      const isDone = doneIds.has(task.id)
+    return tasks
+      .filter((task) => {
+        if (filter === 'open' && task.status === 'done') {
+          return false
+        }
+        if (filter === 'done' && task.status !== 'done') {
+          return false
+        }
+        if (!normalizedSearch) {
+          return true
+        }
 
-      if (filter === 'open' && isDone) {
-        return false
-      }
-      if (filter === 'done' && !isDone) {
-        return false
-      }
-      if (!normalizedSearch) {
-        return true
-      }
-
-      return (
-        task.title.toLowerCase().includes(normalizedSearch) ||
-        task.assignee.toLowerCase().includes(normalizedSearch)
-      )
-    })
+        return (
+          task.title.toLowerCase().includes(normalizedSearch) ||
+          task.assignee.toLowerCase().includes(normalizedSearch)
+        )
+      })
       .slice()
       .sort((left, right) => {
-        const leftDone = doneIds.has(left.id) ? 1 : 0
-        const rightDone = doneIds.has(right.id) ? 1 : 0
+        const leftDone = left.status === 'done' ? 1 : 0
+        const rightDone = right.status === 'done' ? 1 : 0
 
         return (
           leftDone - rightDone ||
@@ -55,25 +60,18 @@ export function TasksPage() {
           PRIORITY_RANK[left.priority] - PRIORITY_RANK[right.priority]
         )
       })
-  }, [doneIds, filter, search])
+  }, [filter, search, tasks])
 
-  const handleToggle = useCallback((taskId: string) => {
-    setDoneIds((current) => {
-      const next = new Set(current)
-
-      if (next.has(taskId)) {
-        next.delete(taskId)
-      } else {
-        next.add(taskId)
-      }
-
-      return next
-    })
-  }, [])
+  const handleToggle = useCallback(
+    (taskId: string, status: TaskStatus) => {
+      setTaskStatus({ taskId, status })
+    },
+    [setTaskStatus],
+  )
 
   const emptyMessage =
-    TASKS.length === 0
-      ? 'No tasks yet. New tasks will appear in this list.'
+    tasks.length === 0
+      ? 'No tasks yet. Add documents to the "tasks" collection in Firestore.'
       : 'No tasks match the current filters.'
 
   return (
@@ -82,12 +80,28 @@ export function TasksPage() {
 
       <TasksToolbar search={search} onSearchChange={setSearch} />
 
-      <TasksList
-        tasks={visibleTasks}
-        doneIds={doneIds}
-        emptyMessage={emptyMessage}
-        onToggle={handleToggle}
-      />
+      {tasksQuery.isPending && <TasksLoading />}
+
+      {tasksQuery.isError && (
+        <TasksError
+          message={
+            tasksQuery.error instanceof Error
+              ? tasksQuery.error.message
+              : 'Unexpected error while loading tasks.'
+          }
+          onRetry={() => {
+            void tasksQuery.refetch()
+          }}
+        />
+      )}
+
+      {tasksQuery.isSuccess && (
+        <TasksList
+          tasks={visibleTasks}
+          emptyMessage={emptyMessage}
+          onToggle={handleToggle}
+        />
+      )}
     </>
   )
 }
