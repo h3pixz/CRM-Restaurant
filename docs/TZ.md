@@ -62,10 +62,10 @@ src/
 | `/` | Home | готово: смена, занятость зала и выручка из Firestore |
 | `/shift` | Shift | готово: смены A/B, переключение on shift |
 | `/payroll` | Payroll | готово: база по смене + бонусы, итоги |
-| `/tasks` | Tasks | готово: фильтры, поиск, отметка выполнения; демо-данные |
+| `/tasks` | Tasks | готово: Firestore, фильтры, поиск, отметка выполнения |
 | `/analytics` | Analytics | готово: выручка по категориям, занятость, топ столиков |
-| `/vacation` | Vacation | готово: одобрение и отклонение заявок; демо-данные |
-| `/sick-days` | Sick days | готово: отметка выздоровления; демо-данные |
+| `/vacation` | Vacation | готово: Firestore, одобрение и отклонение заявок |
+| `/sick-days` | Sick days | готово: Firestore, отметка выздоровления |
 
 Общий CRM-лейаут (sidebar + top bar) применяется ко всем разделам, кроме
 `/restaurants`. Для экранов без макета показывается placeholder.
@@ -100,13 +100,23 @@ src/
 (`features/restaurants/api`), структура `Restaurant`: `id`, `name`, `city`,
 `cuisines`, `priceLevel`, `distanceFt`, `images`, `location`, `labelSide`.
 
-### Демо-данные
+### Коллекции `tasks`, `vacationRequests`, `sickDays`
+
+- `tasks`: `title`, `assignee`, `category` (`kitchen | service | inventory |
+  admin`), `priority` (`high | medium | low`), `dueDate` (ISO), `status`
+  (`open | done`).
+- `vacationRequests`: `employee`, `startDate`, `endDate`, `submittedAt` (ISO),
+  `days`, `status` (`pending | approved | declined`), `note?`.
+- `sickDays`: `employee`, `startDate`, `endDate` (ISO), `days`, `reason`,
+  `status` (`open | closed`), `hasCertificate` (boolean).
+
+Демонстрационные документы записываются командой `npm run seed`
+(`scripts/seed-firestore.mjs`, читает `VITE_FIREBASE_*` из `.env`). Коллекции
+должны быть разрешены в security rules Firestore для чтения и записи.
+
+### Повторное использование данных
 
 `orders` используется повторно на Home и Analytics (все текущие чеки).
-Tasks, Vacation и Sick days работают на типизированных демо-данных
-(`features/*/data`), действия (выполнить задачу, одобрить отпуск,
-закрыть больничный) живут в локальном state. Перевод на Firestore — отдельная
-задача.
 
 ### Конфигурация
 

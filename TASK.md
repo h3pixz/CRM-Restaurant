@@ -39,10 +39,10 @@
 - [x] Restaurants (delivery & pickup): карточки, фильтры и карта на Leaflet (`/restaurants`, вне CRM-лейаута)
 - [x] Shift: смены A/B из `employees`, переключение on shift с оптимистичным обновлением
 - [x] Payroll: база по смене + бонусы и даты биллинга из `employees`
-- [x] Tasks: список задач с фильтрами, поиском и отметкой выполнения (демо-данные)
+- [x] Tasks: список задач с фильтрами, поиском и отметкой выполнения (`tasks`)
 - [x] Analytics: выручка по категориям, занятость зала и топ столиков (`tables`, `orders`)
-- [x] Vacation: заявки на отпуск с одобрением и отклонением (демо-данные)
-- [x] Sick days: больничные с отметкой выздоровления (демо-данные)
+- [x] Vacation: заявки на отпуск с одобрением и отклонением (`vacationRequests`)
+- [x] Sick days: больничные с отметкой выздоровления (`sickDays`)
 
 ## 5. WebSocket-чат
 
@@ -61,7 +61,18 @@
 - [x] Отдельный admin-лейаут по макету: тёмный sidebar с Tables / Orders / Statistics,
       заглушки `/orders` и `/statistics`
 
-## 7. Качество и релиз
+## 7. Firestore для Tasks / Vacation / Sick days
+
+- [x] Коллекции `tasks`, `vacationRequests`, `sickDays`: мапперы с валидацией и сервисы
+- [x] Хуки `useQuery` / `useMutation` с оптимистичным обновлением
+- [x] Экраны читают Firestore: loading / error / empty состояния
+- [x] Удалить демо-данные из `src/features/*/data`
+- [x] Сид-скрипт `scripts/seed-firestore.mjs` и команда `npm run seed`
+- [ ] Запустить `npm run seed`: security rules проекта запрещают запись
+      в новые коллекции — добавить `tasks`, `vacationRequests`, `sickDays`
+      в правила Firestore
+
+## 8. Качество и релиз
 
 - [ ] Заменить favicon на бренд проекта
 - [ ] Проверить responsive всех экранов на 360/390/768px (план — `docs/TZ.md` §8)
@@ -95,8 +106,24 @@
   (`'free' | 'occupied' | 'reserved'`), `reservedAt` (строка вида `'22:30'`,
   опционально, показывается у зарезервированных). Счётчики на экране считаются
   по данным, а не захардкожены.
-- Tasks, Vacation и Sick days пока работают на типизированных демо-данных
-  (`features/*/data`), действия живут в локальном state; Firestore — отдельная задача.
+- Firestore-коллекция `tasks`: `title`, `assignee` (string), `category`
+  (`'kitchen' | 'service' | 'inventory' | 'admin'`), `priority`
+  (`'high' | 'medium' | 'low'`), `dueDate` (ISO-строка), `status`
+  (`'open' | 'done'`).
+- Firestore-коллекция `vacationRequests`: `employee`, `startDate`, `endDate`,
+  `submittedAt` (ISO-строки), `days` (number), `status`
+  (`'pending' | 'approved' | 'declined'`), `note` (опционально).
+- Firestore-коллекция `sickDays`: `employee`, `startDate`, `endDate` (ISO-строки),
+  `days` (number), `reason` (string), `status` (`'open' | 'closed'`),
+  `hasCertificate` (boolean).
+- Сид-скрипт `npm run seed` пишет документы в `tasks`, `vacationRequests`
+  и `sickDays`. Если security rules запрещают запись, добавить в консоли
+  Firestore правила:
+  ```
+  match /tasks/{taskId} { allow read, write: if true; }
+  match /vacationRequests/{requestId} { allow read, write: if true; }
+  match /sickDays/{recordId} { allow read, write: if true; }
+  ```
 - Firestore-коллекция `orders`: id документа = id столика, поле `items` — массив
   `{ name, category: 'appetizer' | 'main' | 'drinks' | 'dessert', price,
   quantity, imageUrl?, note? }`. Правки количеств и удаление позиций на экране
