@@ -17,3 +17,8 @@ export async function addEmployeeBonus(employeeId: string, amount: number): Prom
   const employeeRef = doc(firestore, EMPLOYEES_COLLECTION, employeeId)
   await updateDoc(employeeRef, { bonus: increment(amount) })
 }
+
+export async function setEmployeeOnShift(employeeId: string, onShift: boolean): Promise<void> {
+  const employeeRef = doc(firestore, EMPLOYEES_COLLECTION, employeeId)
+  await updateDoc(employeeRef, { onShift })
+}
