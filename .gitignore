@@ -17,8 +17,6 @@ dist-ssr
 .env.*
 !.env.example
 
-# Local task checklist
-TASK.md
 
 # Editor directories and files
 .vscode/*
