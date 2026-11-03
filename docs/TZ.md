@@ -58,14 +58,14 @@ src/
 | Роут | Раздел | Статус |
 | --- | --- | --- |
 | `/employees` | Employees | готово: Firestore, фильтры, поиск, бонус |
-| `/restaurants` | Restaurants (delivery & pickup) | готово: карточки, фильтры, карта Leaflet; вне CRM-лейаута; данные — мок |
-| `/home` | Home | заглушка |
-| `/shift` | Shift | заглушка |
-| `/payroll` | Payroll | заглушка |
-| `/tasks` | Tasks | заглушка |
-| `/analytics` | Analytics | заглушка |
-| `/vacation` | Vacation | заглушка |
-| `/sick-days` | Sick days | заглушка |
+| `/restaurants` | Restaurants (delivery & pickup) | готово: карточки, фильтры, карта Leaflet; вне CRM-лейаута; данные — Firestore |
+| `/` | Home | готово: смена, занятость зала и выручка из Firestore |
+| `/shift` | Shift | готово: смены A/B, переключение on shift |
+| `/payroll` | Payroll | готово: база по смене + бонусы, итоги |
+| `/tasks` | Tasks | готово: фильтры, поиск, отметка выполнения; демо-данные |
+| `/analytics` | Analytics | готово: выручка по категориям, занятость, топ столиков |
+| `/vacation` | Vacation | готово: одобрение и отклонение заявок; демо-данные |
+| `/sick-days` | Sick days | готово: отметка выздоровления; демо-данные |
 
 Общий CRM-лейаут (sidebar + top bar) применяется ко всем разделам, кроме
 `/restaurants`. Для экранов без макета показывается placeholder.
@@ -96,9 +96,17 @@ src/
 
 ### Рестораны
 
-Сейчас — статические мок-данные (`features/restaurants/data`), структура
-`Restaurant`: `id`, `name`, `city`, `cuisines`, `priceLevel`, `distanceFt`,
-`images`, `location`, `labelSide`. Перевод на Firestore — отдельная задача.
+Данные загружаются из коллекции `restaurants` в Firestore
+(`features/restaurants/api`), структура `Restaurant`: `id`, `name`, `city`,
+`cuisines`, `priceLevel`, `distanceFt`, `images`, `location`, `labelSide`.
+
+### Демо-данные
+
+`orders` используется повторно на Home и Analytics (все текущие чеки).
+Tasks, Vacation и Sick days работают на типизированных демо-данных
+(`features/*/data`), действия (выполнить задачу, одобрить отпуск,
+закрыть больничный) живут в локальном state. Перевод на Firestore — отдельная
+задача.
 
 ### Конфигурация
 
@@ -177,7 +185,7 @@ Firebase инициализируется из `VITE_FIREBASE_*`; отсутст
 1. Фундамент и Employees — сделано.
 2. Restaurants (delivery & pickup) — сделано.
 3. Остальные экраны CRM (Home, Shift, Payroll, Tasks, Analytics, Vacation, Sick days) —
-   по макетам; каждый сразу адаптивный.
+   сделано без макетов в минималистичном стиле; каждый сразу адаптивный.
 4. WebSocket-чат — модуль соединения, UI, интеграция.
 5. README, деплой (Netlify / Vercel / GitHub Pages), ссылка на деплой в README.
 6. Финальный mobile-проход, build + lint + Lighthouse, HTML/CSS-валидация.
