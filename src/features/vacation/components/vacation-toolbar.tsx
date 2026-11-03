@@ -8,11 +8,7 @@ interface VacationToolbarProps {
 
 export function VacationToolbar({ search, onSearchChange }: VacationToolbarProps) {
   return (
-    <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-      <p className="text-xs font-medium text-neutral-500">
-        Requests are stored as demo data for the current version of the CRM.
-      </p>
-
+    <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
       <div className="relative w-full sm:max-w-64">
         <Search
           aria-hidden="true"

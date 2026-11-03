@@ -1,11 +1,12 @@
 import { useCallback, useMemo, useState } from 'react'
-import { VACATION_REQUESTS } from '../data/vacation-requests'
+import { useSetVacationStatus, useVacationRequestsQuery } from '../api'
 import type {
   VacationDecision,
   VacationFilter,
   VacationRequest,
   VacationStatus,
 } from '../types/vacation'
+import { VacationError, VacationLoading } from './vacation-feedback'
 import { VacationList } from './vacation-list'
 import { VacationMetrics, type VacationMetric } from './vacation-metrics'
 import { VACATION_STATUS_LABELS } from './vacation-status'
@@ -19,61 +20,62 @@ const STATUS_RANK: Record<VacationStatus, number> = {
   declined: 2,
 }
 
+const EMPTY_REQUESTS: readonly VacationRequest[] = []
+
 export function VacationPage() {
+  const requestsQuery = useVacationRequestsQuery()
+  const { mutate: setVacationStatus } = useSetVacationStatus()
   const [filter, setFilter] = useState<VacationFilter>('all')
   const [search, setSearch] = useState('')
-  const [statusById, setStatusById] = useState<Readonly<Record<string, VacationStatus>>>({})
+
+  const requests = requestsQuery.data ?? EMPTY_REQUESTS
 
   const metrics = useMemo<readonly VacationMetric[]>(
     () =>
       METRIC_STATUSES.map((status) => ({
         key: status,
         label: VACATION_STATUS_LABELS[status],
-        value: VACATION_REQUESTS.filter(
-          (request) => (statusById[request.id] ?? request.status) === status,
-        ).length,
+        value: requests.filter((request) => request.status === status).length,
       })),
-    [statusById],
+    [requests],
   )
 
   const visibleRequests = useMemo<readonly VacationRequest[]>(() => {
     const normalizedSearch = search.trim().toLowerCase()
 
-    return VACATION_REQUESTS.filter((request) => {
-      const status = statusById[request.id] ?? request.status
+    return requests
+      .filter((request) => {
+        if (filter !== 'all' && request.status !== filter) {
+          return false
+        }
+        if (!normalizedSearch) {
+          return true
+        }
 
-      if (filter !== 'all' && status !== filter) {
-        return false
-      }
-      if (!normalizedSearch) {
-        return true
-      }
-
-      return request.employee.toLowerCase().includes(normalizedSearch)
-    })
-      .slice()
-      .sort((left, right) => {
-        const leftStatus = statusById[left.id] ?? left.status
-        const rightStatus = statusById[right.id] ?? right.status
-
-        return (
-          STATUS_RANK[leftStatus] - STATUS_RANK[rightStatus] ||
-          left.startDate.localeCompare(right.startDate)
-        )
+        return request.employee.toLowerCase().includes(normalizedSearch)
       })
-  }, [filter, search, statusById])
+      .slice()
+      .sort(
+        (left, right) =>
+          STATUS_RANK[left.status] - STATUS_RANK[right.status] ||
+          left.startDate.localeCompare(right.startDate),
+      )
+  }, [filter, requests, search])
 
   const handleFilterChange = useCallback((nextFilter: VacationStatus) => {
     setFilter((currentFilter) => (currentFilter === nextFilter ? 'all' : nextFilter))
   }, [])
 
-  const handleDecide = useCallback((requestId: string, status: VacationDecision) => {
-    setStatusById((current) => ({ ...current, [requestId]: status }))
-  }, [])
+  const handleDecide = useCallback(
+    (requestId: string, status: VacationDecision) => {
+      setVacationStatus({ requestId, status })
+    },
+    [setVacationStatus],
+  )
 
   const emptyMessage =
-    VACATION_REQUESTS.length === 0
-      ? 'No vacation requests yet. New requests will appear in this list.'
+    requests.length === 0
+      ? 'No vacation requests yet. Add documents to the "vacationRequests" collection in Firestore.'
       : 'No vacation requests match the current filters.'
 
   return (
@@ -86,12 +88,28 @@ export function VacationPage() {
 
       <VacationToolbar search={search} onSearchChange={setSearch} />
 
-      <VacationList
-        requests={visibleRequests}
-        statusById={statusById}
-        emptyMessage={emptyMessage}
-        onDecide={handleDecide}
-      />
+      {requestsQuery.isPending && <VacationLoading />}
+
+      {requestsQuery.isError && (
+        <VacationError
+          message={
+            requestsQuery.error instanceof Error
+              ? requestsQuery.error.message
+              : 'Unexpected error while loading vacation requests.'
+          }
+          onRetry={() => {
+            void requestsQuery.refetch()
+          }}
+        />
+      )}
+
+      {requestsQuery.isSuccess && (
+        <VacationList
+          requests={visibleRequests}
+          emptyMessage={emptyMessage}
+          onDecide={handleDecide}
+        />
+      )}
     </>
   )
 }

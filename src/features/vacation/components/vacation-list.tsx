@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { formatShortDate } from '@/utils/format-date'
-import type { VacationDecision, VacationRequest, VacationStatus } from '../types/vacation'
+import type { VacationDecision, VacationRequest } from '../types/vacation'
 import {
   VACATION_STATUS_LABELS,
   VACATION_STATUS_STYLES,
@@ -9,7 +9,6 @@ import {
 
 interface VacationListProps {
   readonly requests: readonly VacationRequest[]
-  readonly statusById: Readonly<Record<string, VacationStatus>>
   readonly emptyMessage: string
   readonly onDecide: (requestId: string, status: VacationDecision) => void
 }
@@ -24,7 +23,6 @@ function getInitials(name: string): string {
 
 export function VacationList({
   requests,
-  statusById,
   emptyMessage,
   onDecide,
 }: VacationListProps) {
@@ -43,7 +41,7 @@ export function VacationList({
       ) : (
         <ul className="divide-y divide-neutral-100">
           {requests.map((request) => {
-            const status = statusById[request.id] ?? request.status
+            const status = request.status
 
             return (
               <li
