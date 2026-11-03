@@ -1,61 +1,67 @@
 import { useCallback, useMemo, useState } from 'react'
-import { SICK_DAY_RECORDS } from '../data/sick-day-records'
-import type { SickDayFilter, SickDayRecord, SickDayStatus } from '../types/sick-day'
+import { useSetSickDayStatus, useSickDayRecordsQuery } from '../api'
+import type { SickDayFilter, SickDayRecord } from '../types/sick-day'
+import { SickDaysError, SickDaysLoading } from './sick-days-feedback'
 import { SickDaysList } from './sick-days-list'
 import { SickDaysMetrics, type SickDayMetric } from './sick-days-metrics'
 import { SickDaysToolbar } from './sick-days-toolbar'
 
+const EMPTY_RECORDS: readonly SickDayRecord[] = []
+
 export function SickDaysPage() {
+  const recordsQuery = useSickDayRecordsQuery()
+  const { mutate: setSickDayStatus } = useSetSickDayStatus()
   const [filter, setFilter] = useState<SickDayFilter>('all')
   const [search, setSearch] = useState('')
-  const [statusById, setStatusById] = useState<Readonly<Record<string, SickDayStatus>>>({})
+
+  const records = recordsQuery.data ?? EMPTY_RECORDS
 
   const metrics = useMemo<readonly SickDayMetric[]>(() => {
-    const openCount = SICK_DAY_RECORDS.filter(
-      (record) => (statusById[record.id] ?? record.status) === 'open',
-    ).length
+    const openCount = records.filter((record) => record.status === 'open').length
 
     return [
-      { key: 'all', label: 'All records', value: SICK_DAY_RECORDS.length },
+      { key: 'all', label: 'All records', value: records.length },
       { key: 'open', label: 'Open cases', value: openCount },
-      { key: 'closed', label: 'Closed cases', value: SICK_DAY_RECORDS.length - openCount },
+      { key: 'closed', label: 'Closed cases', value: records.length - openCount },
     ]
-  }, [statusById])
+  }, [records])
 
   const visibleRecords = useMemo<readonly SickDayRecord[]>(() => {
     const normalizedSearch = search.trim().toLowerCase()
 
-    return SICK_DAY_RECORDS.filter((record) => {
-      const status = statusById[record.id] ?? record.status
+    return records
+      .filter((record) => {
+        if (filter !== 'all' && record.status !== filter) {
+          return false
+        }
+        if (!normalizedSearch) {
+          return true
+        }
 
-      if (filter !== 'all' && status !== filter) {
-        return false
-      }
-      if (!normalizedSearch) {
-        return true
-      }
-
-      return (
-        record.employee.toLowerCase().includes(normalizedSearch) ||
-        record.reason.toLowerCase().includes(normalizedSearch)
-      )
-    })
+        return (
+          record.employee.toLowerCase().includes(normalizedSearch) ||
+          record.reason.toLowerCase().includes(normalizedSearch)
+        )
+      })
       .slice()
       .sort((left, right) => {
-        const leftOpen = (statusById[left.id] ?? left.status) === 'open' ? 0 : 1
-        const rightOpen = (statusById[right.id] ?? right.status) === 'open' ? 0 : 1
+        const leftOpen = left.status === 'open' ? 0 : 1
+        const rightOpen = right.status === 'open' ? 0 : 1
 
         return leftOpen - rightOpen || right.startDate.localeCompare(left.startDate)
       })
-  }, [filter, search, statusById])
+  }, [filter, records, search])
 
-  const handleRecover = useCallback((recordId: string) => {
-    setStatusById((current) => ({ ...current, [recordId]: 'closed' }))
-  }, [])
+  const handleRecover = useCallback(
+    (recordId: string) => {
+      setSickDayStatus({ recordId, status: 'closed' })
+    },
+    [setSickDayStatus],
+  )
 
   const emptyMessage =
-    SICK_DAY_RECORDS.length === 0
-      ? 'No sick day records yet. New records will appear in this list.'
+    records.length === 0
+      ? 'No sick day records yet. Add documents to the "sickDays" collection in Firestore.'
       : 'No sick day records match the current filters.'
 
   return (
@@ -64,12 +70,28 @@ export function SickDaysPage() {
 
       <SickDaysToolbar search={search} onSearchChange={setSearch} />
 
-      <SickDaysList
-        records={visibleRecords}
-        statusById={statusById}
-        emptyMessage={emptyMessage}
-        onRecover={handleRecover}
-      />
+      {recordsQuery.isPending && <SickDaysLoading />}
+
+      {recordsQuery.isError && (
+        <SickDaysError
+          message={
+            recordsQuery.error instanceof Error
+              ? recordsQuery.error.message
+              : 'Unexpected error while loading sick day records.'
+          }
+          onRetry={() => {
+            void recordsQuery.refetch()
+          }}
+        />
+      )}
+
+      {recordsQuery.isSuccess && (
+        <SickDaysList
+          records={visibleRecords}
+          emptyMessage={emptyMessage}
+          onRecover={handleRecover}
+        />
+      )}
     </>
   )
 }

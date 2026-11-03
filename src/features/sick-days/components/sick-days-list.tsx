@@ -1,12 +1,11 @@
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { formatShortDate } from '@/utils/format-date'
-import type { SickDayRecord, SickDayStatus } from '../types/sick-day'
+import type { SickDayRecord } from '../types/sick-day'
 import { SICK_DAY_STATUS_LABELS, SICK_DAY_STATUS_STYLES } from './sick-day-status'
 
 interface SickDaysListProps {
   readonly records: readonly SickDayRecord[]
-  readonly statusById: Readonly<Record<string, SickDayStatus>>
   readonly emptyMessage: string
   readonly onRecover: (recordId: string) => void
 }
@@ -21,7 +20,6 @@ function getInitials(name: string): string {
 
 export function SickDaysList({
   records,
-  statusById,
   emptyMessage,
   onRecover,
 }: SickDaysListProps) {
@@ -44,7 +42,7 @@ export function SickDaysList({
       ) : (
         <ul className="divide-y divide-neutral-100">
           {records.map((record) => {
-            const status = statusById[record.id] ?? record.status
+            const status = record.status
 
             return (
               <li
