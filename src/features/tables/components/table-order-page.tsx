@@ -37,7 +37,7 @@ export function TableOrderPage() {
         </Link>
 
         <div>
-          <h3 className="text-2xl font-bold tracking-tight text-neutral-950">{heading}</h3>
+          <h2 className="text-2xl font-bold tracking-tight text-neutral-950">{heading}</h2>
           <p className="mt-0.5 text-xs font-medium text-neutral-500">Order details</p>
         </div>
       </div>

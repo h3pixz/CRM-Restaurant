@@ -9,6 +9,7 @@ const SHIFT_CLASS: Record<ShiftType, string> = {
 export function EmployeeShiftBadge({ shift }: { shift: ShiftType }) {
   return (
     <span
+      role="img"
       aria-label={`Shift ${shift}`}
       className={cn(
         'inline-flex size-6 items-center justify-center rounded-full text-xs font-semibold text-white',
