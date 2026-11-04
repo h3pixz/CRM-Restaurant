@@ -54,6 +54,7 @@ Leaflet.
 | Данные | TanStack Query, Firebase Firestore (Firestore Lite) |
 | Карта | Leaflet + react-leaflet |
 | Чат | нативный WebSocket, `wss://ws.ifelse.io` |
+| Качество | Playwright, W3C Nu HTML Checker, W3C CSS Validator |
 
 ## Быстрый старт
 
@@ -117,6 +118,29 @@ npm run seed
 | `npm run preview` | Локальный просмотр production-сборки |
 | `npm run lint` | ESLint по всему проекту |
 | `npm run seed` | Заполнение Firestore демо-данными из `.env` |
+| `npm run validate:html` | Сборка, рендер всех маршрутов в headless Chrome и проверка HTML/CSS W3C-валидаторами |
+
+## Качество
+
+HTML проверяется по отрендеренному DOM: Playwright открывает каждый маршрут в headless Chrome,
+снимает разметку и отправляет её в W3C Nu HTML Checker. CSS проверяется W3C CSS Validator —
+авторский `src/index.css` и собранные бандлы.
+
+Результаты на 2026-11-04:
+
+| Проверка | Результат |
+| --- | --- |
+| HTML, 15 маршрутов | 0 ошибок, 0 предупреждений |
+| CSS, авторский и собранные файлы | 81 замечание, все — синтаксис Tailwind v4 (`@theme`, `@apply`, container queries), который W3C CSS Validator не поддерживает |
+
+CSS-замечания не являются дефектами: стили компилируются Tailwind и Vite без предупреждений.
+Полный отчёт с разбивкой по маршрутам — `docs/quality/markup-validation.md`.
+
+Для повторной проверки нужны установленный Chrome или Edge и доступ к `validator.w3.org`:
+
+```bash
+npm run validate:html
+```
 
 ## Структура проекта
 
