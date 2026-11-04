@@ -68,7 +68,7 @@
 - [x] Экраны читают Firestore: loading / error / empty состояния
 - [x] Удалить демо-данные из `src/features/*/data`
 - [x] Сид-скрипт `scripts/seed-firestore.mjs` и команда `npm run seed`
-- [ ] Запустить `npm run seed`: security rules проекта запрещают запись
+- [x] Запустить `npm run seed`: security rules проекта запрещают запись
       в новые коллекции — добавить `tasks`, `vacationRequests`, `sickDays`
       в правила Firestore
 
