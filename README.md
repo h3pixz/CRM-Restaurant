@@ -1,75 +1,157 @@
-# React + TypeScript + Vite
+# Restaurant CRM
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SPA для управления рестораном: сотрудники и смены, бонусы и payroll, задачи, аналитика
+зала и выручки, отпуска и больничные, схема зала с заказами, а также live-чат команды
+по WebSocket.
 
-Currently, two official plugins are available:
+Приложение собрано на React 19 + TypeScript в строгом режиме, TanStack Router и TanStack
+Query, данные — Firebase Firestore, стили — Tailwind CSS v4 и shadcn/ui, карта ресторанов —
+Leaflet.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Демо:** ссылка на деплой (Vercel) добавляется после публикации.
 
-## React Compiler
+## Возможности
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### CRM
 
-## Expanding the ESLint configuration
+- **Home** — сводка по смене, занятость зала и выручка.
+- **Shift** — сотрудники смен A/B, переключение статуса on shift с оптимистичным обновлением.
+- **Payroll** — базовая ставка по смене, бонусы и даты биллинга.
+- **Employees** — таблица сотрудников с фильтрами и поиском, метрики, начисление бонуса.
+- **Tasks** — задачи с категориями, приоритетами, фильтрами и отметкой выполнения.
+- **Analytics** — выручка по категориям, занятость зала, топ столиков.
+- **Vacation** — заявки на отпуск с одобрением и отклонением.
+- **Sick days** — больничные с отметкой выздоровления.
+- **Chat** — чат через WebSocket с состояниями соединения
+  (connecting / connected / disconnected / error / reconnecting).
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Admin (отдельный лейаут)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Tables** — схема зала: метрики, фильтр по статусу, адаптивная сетка.
+- **Table order** — заказ для столика: категории блюд, изменение количеств, удаление
+  позиций, итог.
+- **Orders / Statistics** — заглушки разделов.
+- Доступ к `/tables` и `/tables/:tableId` закрыт демо-авторизацией по логину и паролю.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Restaurants
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Отдельная страница `/restaurants` вне CRM-лейаута: карточки доставки и самовывоза,
+фильтры и карта на Leaflet.
 
+### Адаптивность
+
+Все экраны проверены на 360/390/768px: sidebar превращается в drawer, таблицы —
+в карточки или локальный скролл, чат занимает полный экран, тач-таргеты не меньше 44px.
+
+## Стек
+
+| Слой | Технологии |
+| --- | --- |
+| Сборка | Vite, TypeScript (`strict`, `noUncheckedIndexedAccess`, без `any`) |
+| UI | React 19, Tailwind CSS v4, shadcn/ui, lucide-react |
+| Роутинг | TanStack Router |
+| Данные | TanStack Query, Firebase Firestore (Firestore Lite) |
+| Карта | Leaflet + react-leaflet |
+| Чат | нативный WebSocket, `wss://ws.ifelse.io` |
+
+## Быстрый старт
+
+Требуется Node.js 20.19+ (или 22.12+) и проект Firebase с включённым Firestore.
+
+```bash
+npm install
+cp .env.example .env   # заполнить переменные Firebase
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Приложение откроется на `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Без `.env` приложение падает на старте: `src/lib/firebase.ts` валидирует переменные
+окружения и выводит понятную ошибку.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Переменные окружения
+
+| Переменная | Откуда взять |
+| --- | --- |
+| `VITE_FIREBASE_API_KEY` | Firebase Console → Project settings → Your apps |
+| `VITE_FIREBASE_AUTH_DOMAIN` | там же |
+| `VITE_FIREBASE_PROJECT_ID` | там же |
+| `VITE_FIREBASE_STORAGE_BUCKET` | там же |
+| `VITE_FIREBASE_MESSAGING_SENDER_ID` | там же |
+| `VITE_FIREBASE_APP_ID` | там же |
+
+`.env` в репозиторий не коммитится, актуальный перечень переменных — `.env.example`.
+
+## Firestore
+
+Коллекции: `employees`, `tables`, `orders`, `tasks`, `vacationRequests`, `sickDays`,
+`restaurants`. Документы маппятся в типизированные модели; невалидный документ
+роняет запрос с понятной ошибкой.
+
+Для чтения данных приложению нужны соответствующие правила. Правила для демо-проекта:
 
 ```
+match /employees/{employeeId} { allow read, write: if true; }
+match /tables/{tableId} { allow read: if true; }
+match /orders/{tableId} { allow read: if true; }
+match /restaurants/{restaurantId} { allow read: if true; }
+match /tasks/{taskId} { allow read, write: if true; }
+match /vacationRequests/{requestId} { allow read, write: if true; }
+match /sickDays/{recordId} { allow read, write: if true; }
+```
+
+Демо-данные для `tasks`, `vacationRequests` и `sickDays` заливаются сид-скриптом
+(нужны права на запись в эти коллекции):
+
+```bash
+npm run seed
+```
+
+## Скрипты
+
+| Команда | Действие |
+| --- | --- |
+| `npm run dev` | Запуск dev-сервера Vite |
+| `npm run build` | Проверка типов (`tsc -b`) и production-сборка в `dist/` |
+| `npm run preview` | Локальный просмотр production-сборки |
+| `npm run lint` | ESLint по всему проекту |
+| `npm run seed` | Заполнение Firestore демо-данными из `.env` |
+
+## Структура проекта
+
+```
+src/
+├── app/          # провайдеры, QueryClient, роутер, навигация
+├── components/   # общие компоненты и shadcn/ui
+├── features/     # фичи: employees, tables, chat, analytics, ...
+├── lib/          # инициализация Firebase, утилиты
+├── routes/       # определение роутов TanStack Router
+├── types/        # общие типы
+└── utils/        # хелперы
+```
+
+Каждая фича хранит `api` (сервисы Firestore и хуки TanStack Query), `components`,
+`types` и публичный `index.ts`.
+
+## Авторизация админки
+
+`/login` открывает доступ к админ-разделу. Демо-доступ: логин `admin`, пароль `admin`.
+Сессия живёт в `sessionStorage` текущей вкладки — это клиентское ограничение демо-стенда,
+а не полноценная аутентификация.
+
+## Деплой
+
+Проект разворачивается на Vercel как статическая SPA:
+
+- Build command: `npm run build`
+- Output directory: `dist`
+- Переменные `VITE_FIREBASE_*` задаются в Project Settings → Environment Variables.
+
+SPA-роутинг требует rewrite всех путей на `index.html` (конфигурация — `vercel.json`).
+Для GitHub Pages дополнительно понадобились бы `base` в Vite и fallback через `404.html`.
+
+## Документация
+
+- `docs/TZ.md` — техническое задание и критерии готовности.
+- `TASK.md` — живой чек-лист проекта.
+- `CLAUDE.md` — правила разработки в репозитории.
