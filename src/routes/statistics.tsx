@@ -1,9 +1,11 @@
-import { createRoute } from '@tanstack/react-router'
-import { AdminStatisticsPage } from '@/features/admin'
+import { createRoute, lazyRouteComponent } from '@tanstack/react-router'
 import { adminLayoutRoute } from './admin-layout-route'
 
 export const statisticsRoute = createRoute({
   getParentRoute: () => adminLayoutRoute,
   path: '/statistics',
-  component: AdminStatisticsPage,
+  component: lazyRouteComponent(
+    () => import('@/features/admin/components/admin-pages'),
+    'AdminStatisticsPage',
+  ),
 })

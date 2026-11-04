@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, updateDoc } from 'firebase/firestore'
+import { collection, doc, getDocs, updateDoc } from 'firebase/firestore/lite'
 import { firestore } from '@/lib/firebase'
 import type { VacationRequest, VacationStatus } from '../types/vacation'
 import { mapVacationRequestDocument } from './vacation-mapper'

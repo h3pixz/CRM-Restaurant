@@ -1,5 +1,5 @@
-import { createRoute, redirect } from '@tanstack/react-router'
-import { isAdminAuthenticated, LoginPage } from '@/features/auth'
+import { createRoute, lazyRouteComponent, redirect } from '@tanstack/react-router'
+import { isAdminAuthenticated } from '@/features/auth'
 import { rootRoute } from './root-route'
 
 interface LoginSearch {
@@ -17,5 +17,8 @@ export const loginRoute = createRoute({
       throw redirect({ to: '/tables' })
     }
   },
-  component: LoginPage,
+  component: lazyRouteComponent(
+    () => import('@/features/auth/components/login-page'),
+    'LoginPage',
+  ),
 })

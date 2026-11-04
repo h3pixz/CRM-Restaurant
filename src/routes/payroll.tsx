@@ -1,9 +1,11 @@
-import { createRoute } from '@tanstack/react-router'
-import { PayrollPage } from '@/features/payroll'
+import { createRoute, lazyRouteComponent } from '@tanstack/react-router'
 import { appLayoutRoute } from './app-layout-route'
 
 export const payrollRoute = createRoute({
   getParentRoute: () => appLayoutRoute,
   path: '/payroll',
-  component: PayrollPage,
+  component: lazyRouteComponent(
+    () => import('@/features/payroll/components/payroll-page'),
+    'PayrollPage',
+  ),
 })

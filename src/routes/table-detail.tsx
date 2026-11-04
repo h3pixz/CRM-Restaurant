@@ -1,9 +1,11 @@
-import { createRoute } from '@tanstack/react-router'
-import { TableOrderPage } from '@/features/tables'
+import { createRoute, lazyRouteComponent } from '@tanstack/react-router'
 import { adminLayoutRoute } from './admin-layout-route'
 
 export const tableDetailRoute = createRoute({
   getParentRoute: () => adminLayoutRoute,
   path: '/tables/$tableId',
-  component: TableOrderPage,
+  component: lazyRouteComponent(
+    () => import('@/features/tables/components/table-order-page'),
+    'TableOrderPage',
+  ),
 })

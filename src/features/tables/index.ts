@@ -1,5 +1,3 @@
-export { TableOrderPage } from './components/table-order-page'
-export { TablesPage } from './components/tables-page'
 export {
   ordersQueryKeys,
   tableOrderQueryKeys,

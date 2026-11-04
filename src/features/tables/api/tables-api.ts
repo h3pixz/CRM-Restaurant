@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore/lite'
 import { firestore } from '@/lib/firebase'
 import type { RestaurantTable } from '../types/table'
 import { mapTableDocument } from './table-mapper'

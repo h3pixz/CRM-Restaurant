@@ -1,9 +1,11 @@
-import { createRoute } from '@tanstack/react-router'
-import { RestaurantsPage } from '@/features/restaurants'
+import { createRoute, lazyRouteComponent } from '@tanstack/react-router'
 import { rootRoute } from './root-route'
 
 export const restaurantsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/restaurants',
-  component: RestaurantsPage,
+  component: lazyRouteComponent(
+    () => import('@/features/restaurants/components/restaurants-page'),
+    'RestaurantsPage',
+  ),
 })
