@@ -34,13 +34,14 @@ export function ChatComposer({ disabled, onSend }: ChatComposerProps) {
         placeholder={disabled ? 'Connect to send messages' : 'Type a message…'}
         disabled={disabled}
         autoComplete="off"
-        className="h-10"
+        className="h-11 md:h-10"
       />
       <Button
         type="submit"
         size="icon-lg"
         disabled={disabled || draft.trim().length === 0}
         aria-label="Send message"
+        className="size-11"
       >
         <SendHorizontal aria-hidden="true" />
       </Button>

@@ -11,7 +11,7 @@ export function ChatPage() {
   const isBusy = status === 'connecting' || status === 'reconnecting'
 
   return (
-    <section className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+    <section className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm max-lg:-mx-4 max-lg:-mb-5 max-lg:rounded-none max-lg:border-x-0 max-lg:shadow-none">
       <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4">
         <div className="min-w-0">
           <h3 className="text-sm font-semibold text-neutral-900">Team chat</h3>
@@ -23,7 +23,13 @@ export function ChatPage() {
         <div className="flex items-center gap-3">
           <ChatStatusBadge status={status} />
           {isConnected ? (
-            <Button type="button" variant="outline" size="sm" onClick={disconnect}>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={disconnect}
+              className="h-11 px-4 md:h-8 md:px-3"
+            >
               <Unplug aria-hidden="true" />
               Disconnect
             </Button>
@@ -34,6 +40,7 @@ export function ChatPage() {
               size="sm"
               onClick={reconnect}
               disabled={isBusy}
+              className="h-11 px-4 md:h-8 md:px-3"
             >
               <RotateCw aria-hidden="true" className={isBusy ? 'animate-spin' : undefined} />
               {isBusy ? 'Connecting…' : 'Reconnect'}
