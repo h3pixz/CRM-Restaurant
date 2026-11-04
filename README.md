@@ -73,12 +73,12 @@ npm run dev
 
 | Переменная | Откуда взять |
 | --- | --- |
-| `VITE_FIREBASE_API_KEY` | Firebase Console → Project settings → Your apps |
-| `VITE_FIREBASE_AUTH_DOMAIN` | там же |
-| `VITE_FIREBASE_PROJECT_ID` | там же |
-| `VITE_FIREBASE_STORAGE_BUCKET` | там же |
-| `VITE_FIREBASE_MESSAGING_SENDER_ID` | там же |
-| `VITE_FIREBASE_APP_ID` | там же |
+| `FIREBASE_API_KEY` | Firebase Console → Project settings → Your apps |
+| `FIREBASE_AUTH_DOMAIN` | там же |
+| `FIREBASE_PROJECT_ID` | там же |
+| `FIREBASE_STORAGE_BUCKET` | там же |
+| `FIREBASE_MESSAGING_SENDER_ID` | там же |
+| `FIREBASE_APP_ID` | там же |
 
 `.env` в репозиторий не коммитится, актуальный перечень переменных — `.env.example`.
 
