@@ -7,19 +7,33 @@ const timeFormatter = new Intl.DateTimeFormat('en-US', {
   minute: '2-digit',
 })
 
+const PIN_THRESHOLD_PX = 48
+
 interface ChatMessageListProps {
   readonly messages: readonly ChatMessage[]
 }
 
 export function ChatMessageList({ messages }: ChatMessageListProps) {
-  const bottomRef = useRef<HTMLDivElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const isPinnedRef = useRef(true)
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ block: 'end' })
+    const node = scrollRef.current
+    if (!node || !isPinnedRef.current) return
+    node.scrollTop = node.scrollHeight
   }, [messages.length])
+
+  function handleScroll() {
+    const node = scrollRef.current
+    if (!node) return
+    isPinnedRef.current =
+      node.scrollHeight - node.scrollTop - node.clientHeight <= PIN_THRESHOLD_PX
+  }
 
   return (
     <div
+      ref={scrollRef}
+      onScroll={handleScroll}
       role="log"
       aria-live="polite"
       aria-label="Chat messages"
@@ -60,7 +74,6 @@ export function ChatMessageList({ messages }: ChatMessageListProps) {
           )
         })
       )}
-      <div ref={bottomRef} />
     </div>
   )
 }

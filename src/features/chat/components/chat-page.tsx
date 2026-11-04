@@ -11,7 +11,7 @@ export function ChatPage() {
   const isBusy = status === 'connecting' || status === 'reconnecting'
 
   return (
-    <section className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm max-lg:-mx-4 max-lg:-mb-5 max-lg:rounded-none max-lg:border-x-0 max-lg:shadow-none">
+    <section className="flex h-[calc(100dvh-6rem)] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm max-lg:-mx-4 max-lg:-mb-5 max-lg:rounded-none max-lg:border-x-0 max-lg:shadow-none lg:h-[calc(100dvh-8.25rem)]">
       <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-4">
         <div className="min-w-0">
           <h3 className="text-sm font-semibold text-neutral-900">Team chat</h3>
