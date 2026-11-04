@@ -44,13 +44,15 @@ export function TasksList({ tasks, emptyMessage, onToggle }: TasksListProps) {
                 key={task.id}
                 className="flex items-start gap-3 px-5 py-4 transition-colors hover:bg-neutral-50/80"
               >
-                <input
-                  type="checkbox"
-                  checked={isDone}
-                  onChange={() => onToggle(task.id, isDone ? 'open' : 'done')}
-                  aria-label={isDone ? `Mark "${task.title}" as open` : `Mark "${task.title}" as done`}
-                  className="mt-1 size-4 shrink-0 cursor-pointer accent-neutral-900"
-                />
+                <label className="-m-2 flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-md hover:bg-neutral-100 md:m-0 md:size-5">
+                  <input
+                    type="checkbox"
+                    checked={isDone}
+                    onChange={() => onToggle(task.id, isDone ? 'open' : 'done')}
+                    aria-label={isDone ? `Mark "${task.title}" as open` : `Mark "${task.title}" as done`}
+                    className="size-5 cursor-pointer accent-neutral-900 md:size-4"
+                  />
+                </label>
 
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1.5">

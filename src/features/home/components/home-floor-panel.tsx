@@ -29,7 +29,7 @@ export function HomeFloorPanel({ tables }: HomeFloorPanelProps) {
         <h2 className="text-sm font-semibold text-neutral-900">Floor overview</h2>
         <Link
           to="/tables"
-          className="text-xs font-medium text-neutral-500 transition-colors hover:text-neutral-900"
+          className="inline-flex min-h-11 items-center text-xs font-medium text-neutral-500 transition-colors hover:text-neutral-900 md:min-h-0"
         >
           Open tables
         </Link>

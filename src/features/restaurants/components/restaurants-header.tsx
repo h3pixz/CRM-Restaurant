@@ -16,7 +16,7 @@ interface RestaurantsHeaderProps {
 }
 
 const ICON_BUTTON_CLASS =
-  'flex size-9 items-center justify-center rounded-md transition-colors focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:outline-none'
+  'flex size-11 items-center justify-center rounded-md transition-colors focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:outline-none sm:size-9'
 
 export function RestaurantsHeader({
   mode,
@@ -40,7 +40,7 @@ export function RestaurantsHeader({
             aria-pressed={mode === value}
             onClick={() => onModeChange(value)}
             className={cn(
-              'rounded px-2.5 py-1 uppercase transition-colors focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:outline-none sm:px-3.5',
+              'min-h-11 rounded px-2.5 py-1 uppercase transition-colors focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:outline-none sm:min-h-0 sm:px-3.5',
               mode === value
                 ? 'bg-white font-semibold text-brand shadow-sm'
                 : 'text-gray-500 hover:text-gray-800',
@@ -53,7 +53,7 @@ export function RestaurantsHeader({
 
       <div className="order-2 flex shrink-0 items-center gap-2.5 sm:order-3">
         {isSearchOpen ? (
-          <div className="flex h-9 items-center gap-2 rounded-md border border-gray-200 bg-gray-50 px-2.5">
+          <div className="flex h-11 items-center gap-2 rounded-md border border-gray-200 bg-gray-50 px-2.5 sm:h-9">
             <Search aria-hidden="true" className="size-4 shrink-0 text-gray-400" />
             <input
               autoFocus
@@ -76,7 +76,7 @@ export function RestaurantsHeader({
                 setIsSearchOpen(false)
                 onSearchChange('')
               }}
-              className="text-gray-400 transition-colors hover:text-gray-700 focus-visible:outline-none"
+              className="flex size-11 shrink-0 items-center justify-center rounded text-gray-400 transition-colors hover:text-gray-700 focus-visible:outline-none sm:size-9"
             >
               <X aria-hidden="true" className="size-3.5" />
             </button>

@@ -7,7 +7,7 @@ export function AdminLayout() {
   const [isNavOpen, setIsNavOpen] = useState(false)
 
   return (
-    <div className="flex min-h-screen bg-background text-foreground selection:bg-neutral-800 selection:text-white">
+    <div className="flex min-h-dvh bg-background text-foreground selection:bg-neutral-800 selection:text-white">
       <AdminSidebar />
       <AdminSidebarDrawer open={isNavOpen} onOpenChange={setIsNavOpen} />
 

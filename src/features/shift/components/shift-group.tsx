@@ -92,7 +92,7 @@ export function ShiftGroup({
                   size="sm"
                   disabled={isPending}
                   onClick={() => onToggle(employee)}
-                  className="h-7 rounded-md px-3 text-xs"
+                  className="h-11 rounded-md px-3 text-xs md:h-7"
                 >
                   {employee.onShift ? 'Clock out' : 'Clock in'}
                 </Button>

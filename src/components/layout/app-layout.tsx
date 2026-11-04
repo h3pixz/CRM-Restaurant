@@ -12,7 +12,7 @@ export function AppLayout() {
   const title = getNavItemByPath(pathname)?.label ?? 'Restaurant CRM'
 
   return (
-    <div className="flex min-h-screen bg-background text-foreground selection:bg-neutral-800 selection:text-white">
+    <div className="flex min-h-dvh bg-background text-foreground selection:bg-neutral-800 selection:text-white">
       <AppSidebar />
       <AppSidebarDrawer open={isNavOpen} onOpenChange={setIsNavOpen} />
 

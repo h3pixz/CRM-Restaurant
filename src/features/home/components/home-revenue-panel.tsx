@@ -36,7 +36,7 @@ export function HomeRevenuePanel({ orders }: HomeRevenuePanelProps) {
         <h2 className="text-sm font-semibold text-neutral-900">Revenue by category</h2>
         <Link
           to="/analytics"
-          className="text-xs font-medium text-neutral-500 transition-colors hover:text-neutral-900"
+          className="inline-flex min-h-11 items-center text-xs font-medium text-neutral-500 transition-colors hover:text-neutral-900 md:min-h-0"
         >
           Open analytics
         </Link>

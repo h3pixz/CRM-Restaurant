@@ -88,7 +88,7 @@ export function SickDaysList({
                     type="button"
                     variant="outline"
                     size="sm"
-                    className="h-7 rounded-md border-neutral-200 px-3 text-xs"
+                    className="h-11 rounded-md border-neutral-200 px-3 text-xs md:h-7"
                     onClick={() => onRecover(record.id)}
                   >
                     Mark recovered

@@ -16,7 +16,10 @@ interface TablesMetricsProps {
 
 export function TablesMetrics({ metrics, activeFilter, onFilterChange }: TablesMetricsProps) {
   return (
-    <section aria-label="Table statistics" className="mb-7 grid grid-cols-1 gap-6 md:grid-cols-3">
+    <section
+      aria-label="Table statistics"
+      className="mb-7 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6"
+    >
       {metrics.map((metric) => {
         const isActive = metric.key === activeFilter
 
@@ -44,7 +47,7 @@ export function TablesMetrics({ metrics, activeFilter, onFilterChange }: TablesM
                 aria-pressed={isActive}
                 onClick={() => onFilterChange(metric.key)}
                 className={cn(
-                  'h-7 rounded-md border-neutral-200/50 bg-white px-4 text-xs font-medium text-neutral-800 shadow-sm hover:bg-neutral-50',
+                  'h-11 rounded-md border-neutral-200/50 bg-white px-4 text-xs font-medium text-neutral-800 shadow-sm hover:bg-neutral-50 md:h-7',
                   isActive &&
                     'border-neutral-900 bg-neutral-900 text-white hover:bg-neutral-800 hover:text-white',
                 )}

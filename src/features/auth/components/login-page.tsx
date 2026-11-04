@@ -55,7 +55,7 @@ export function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4 py-10">
+    <div className="flex min-h-dvh items-center justify-center bg-background px-4 py-10">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
           <p className="font-logo text-[19px] font-bold tracking-[0.12em] text-neutral-900 uppercase">
@@ -76,6 +76,7 @@ export function LoginPage() {
                 required
                 value={login}
                 onChange={(event) => setLogin(event.target.value)}
+                className="h-11"
               />
             </label>
 
@@ -88,6 +89,7 @@ export function LoginPage() {
                 required
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
+                className="h-11"
               />
             </label>
 
@@ -97,7 +99,7 @@ export function LoginPage() {
               </p>
             )}
 
-            <Button type="submit" className="mt-2 w-full">
+            <Button type="submit" className="mt-2 h-11 w-full">
               Sign in
             </Button>
           </form>

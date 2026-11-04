@@ -15,19 +15,19 @@ export function TableOrderSummary({ total }: TableOrderSummaryProps) {
           {formatCurrency(total)}
         </span>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <Button
             type="button"
             variant="outline"
             disabled
-            className="rounded-lg border-neutral-900 px-5 py-2.5 text-xs font-semibold tracking-wide text-neutral-900 hover:bg-neutral-100"
+            className="h-11 rounded-lg border-neutral-900 px-5 text-xs font-semibold tracking-wide text-neutral-900 hover:bg-neutral-100 sm:h-9"
           >
             Discount
           </Button>
           <Button
             type="button"
             disabled
-            className="rounded-lg bg-[#1E242C] px-5 py-2.5 text-xs font-semibold tracking-wide text-white shadow-sm hover:bg-black"
+            className="h-11 rounded-lg bg-[#1E242C] px-5 text-xs font-semibold tracking-wide text-white shadow-sm hover:bg-black sm:h-9"
           >
             Check Order
           </Button>

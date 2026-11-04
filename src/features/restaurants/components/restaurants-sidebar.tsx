@@ -27,7 +27,7 @@ export function RestaurantsSidebar({
         <div className="flex items-center gap-2 rounded-lg border border-gray-200/70 bg-gray-100/70 px-2.5 py-1.5">
           <Filter aria-hidden="true" className="size-4 shrink-0 text-brand" strokeWidth={2} />
 
-          <div className="flex flex-wrap items-center gap-1.5 text-xs text-gray-700">
+          <div className="flex flex-nowrap items-center gap-1.5 overflow-x-auto text-xs text-gray-700">
             {CUISINE_FILTERS.map((cuisine) => {
               const isActive = activeCuisines.includes(cuisine)
 
@@ -38,7 +38,7 @@ export function RestaurantsSidebar({
                   aria-pressed={isActive}
                   onClick={() => onToggleCuisine(cuisine)}
                   className={cn(
-                    'inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:outline-none',
+                    'inline-flex min-h-11 shrink-0 items-center justify-center gap-1 rounded px-2.5 py-0.5 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:outline-none sm:min-h-0 sm:px-1.5',
                     isActive
                       ? 'bg-white text-gray-800 shadow-sm'
                       : 'text-gray-500 hover:bg-gray-200/60',

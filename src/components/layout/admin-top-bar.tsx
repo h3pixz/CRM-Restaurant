@@ -22,14 +22,14 @@ export function AdminTopBar({ onOpenNav }: AdminTopBarProps) {
         <button
           type="button"
           aria-label="Notifications"
-          className="rounded-md text-neutral-700 transition-colors hover:text-black focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+          className="-m-2 flex size-11 items-center justify-center rounded-md text-neutral-700 transition-colors hover:bg-neutral-200/60 hover:text-black focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
           <Bell aria-hidden="true" className="size-5" strokeWidth={1.7} />
         </button>
 
         <button
           type="button"
-          className="group flex items-center gap-2.5 rounded-md text-sm font-medium text-neutral-800 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+          className="group flex min-h-11 items-center gap-2.5 rounded-md px-1 text-sm font-medium text-neutral-800 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
           <CircleUserRound
             aria-hidden="true"

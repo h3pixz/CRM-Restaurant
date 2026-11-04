@@ -31,7 +31,7 @@ export function TableOrderPage() {
         <Link
           to="/tables"
           aria-label="Back to tables"
-          className="mt-1 rounded-md text-neutral-700 transition-colors hover:text-black focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+          className="-ml-2 flex size-11 shrink-0 items-center justify-center rounded-md text-neutral-700 transition-colors hover:bg-neutral-200/60 hover:text-black focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
           <ArrowLeft aria-hidden="true" className="size-5" strokeWidth={2} />
         </Link>

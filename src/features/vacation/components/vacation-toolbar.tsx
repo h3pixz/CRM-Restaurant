@@ -21,7 +21,7 @@ export function VacationToolbar({ search, onSearchChange }: VacationToolbarProps
           onChange={(event) => onSearchChange(event.target.value)}
           placeholder="Search by employee"
           aria-label="Search vacation requests"
-          className="h-8 rounded-md border-neutral-200 bg-white pr-3 pl-8 text-xs shadow-xs placeholder:text-neutral-400"
+          className="h-11 rounded-md border-neutral-200 bg-white pr-3 pl-8 text-xs shadow-xs placeholder:text-neutral-400 md:h-8"
         />
       </div>
     </div>
