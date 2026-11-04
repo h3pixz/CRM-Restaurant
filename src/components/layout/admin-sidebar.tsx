@@ -66,7 +66,7 @@ function AdminSidebarNav({ onNavigate }: AdminSidebarNavProps) {
 
 export function AdminSidebar() {
   return (
-    <aside className="hidden w-64 shrink-0 flex-col bg-[#202020] px-4 py-7 lg:flex">
+    <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col bg-[#202020] px-4 py-7 lg:flex">
       <AdminSidebarBrand />
       <AdminSidebarNav />
     </aside>
