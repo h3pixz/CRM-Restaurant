@@ -5,7 +5,7 @@ export const ordersRoute = createRoute({
   getParentRoute: () => adminLayoutRoute,
   path: '/orders',
   component: lazyRouteComponent(
-    () => import('@/features/admin/components/admin-pages'),
+    () => import('@/features/admin/components/admin-orders-page'),
     'AdminOrdersPage',
   ),
 })

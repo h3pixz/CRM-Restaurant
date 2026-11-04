@@ -60,8 +60,9 @@
 - [x] Экран заказа `/tables/:tableId`: категории, степеры, удаление, итог
 - [x] Пункт Tables в навигации и заголовок раздела для вложенного роута
 - [x] Вход в админку по логину/паролю: `/login`, защита `/tables` и `/tables/:tableId`
-- [x] Отдельный admin-лейаут по макету: тёмный sidebar с Tables / Orders / Statistics,
-      заглушки `/orders` и `/statistics`
+- [x] Отдельный admin-лейаут по макету: тёмный sidebar с Tables / Orders / Statistics
+- [x] Экран `/orders`: метрики по текущим чекам и список заказов с переходом к столику
+- [x] Экран `/statistics`: выручка по категориям, занятость зала и топ столиков
 
 ## 7. Firestore для Tasks / Vacation / Sick days
 

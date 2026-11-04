@@ -5,7 +5,7 @@ export const statisticsRoute = createRoute({
   getParentRoute: () => adminLayoutRoute,
   path: '/statistics',
   component: lazyRouteComponent(
-    () => import('@/features/admin/components/admin-pages'),
+    () => import('@/features/admin/components/admin-statistics-page'),
     'AdminStatisticsPage',
   ),
 })
