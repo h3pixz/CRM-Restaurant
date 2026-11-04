@@ -21,7 +21,7 @@ export function TopTablesPanel({ rows }: TopTablesPanelProps) {
     >
       <header className="flex items-center justify-between gap-3 border-b border-neutral-100 px-5 py-4">
         <h2 className="text-sm font-semibold text-neutral-900">Top tables by check size</h2>
-        <span className="text-xs text-neutral-400">{rows.length} shown</span>
+        <span className="text-xs text-neutral-500">{rows.length} shown</span>
       </header>
 
       {rows.length === 0 ? (
@@ -34,11 +34,11 @@ export function TopTablesPanel({ rows }: TopTablesPanelProps) {
             <li key={row.id} className="px-5 py-4">
               <div className="flex items-baseline justify-between gap-3">
                 <div className="flex items-baseline gap-2.5">
-                  <span className="w-4 text-[11px] font-semibold text-neutral-400">
+                  <span className="w-4 text-[11px] font-semibold text-neutral-500">
                     {index + 1}
                   </span>
                   <span className="text-sm font-medium text-neutral-900">Table {row.label}</span>
-                  <span className="text-[11px] text-neutral-400">
+                  <span className="text-[11px] text-neutral-500">
                     {row.itemsCount} {row.itemsCount === 1 ? 'item' : 'items'}
                   </span>
                 </div>

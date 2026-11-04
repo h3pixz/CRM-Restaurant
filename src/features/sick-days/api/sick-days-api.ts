@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, updateDoc } from 'firebase/firestore'
+import { collection, doc, getDocs, updateDoc } from 'firebase/firestore/lite'
 import { firestore } from '@/lib/firebase'
 import type { SickDayRecord, SickDayStatus } from '../types/sick-day'
 import { mapSickDayDocument } from './sick-day-mapper'

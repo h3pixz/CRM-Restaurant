@@ -35,6 +35,7 @@ export function TopBar({ title, userName, onOpenNav }: TopBarProps) {
 
         <button
           type="button"
+          aria-label={`Account: ${userName}`}
           className="group flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-md px-1 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
           <CircleUserRound

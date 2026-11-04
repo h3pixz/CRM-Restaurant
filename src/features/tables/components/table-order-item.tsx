@@ -23,7 +23,7 @@ function ItemDetails({ item, showPrice }: ItemDetailsProps) {
       {showPrice && (
         <p className="text-[11px] text-neutral-500">{formatCurrency(item.price)}</p>
       )}
-      {item.note && <p className="truncate text-[11px] text-neutral-400">{item.note}</p>}
+      {item.note && <p className="truncate text-[11px] text-neutral-500">{item.note}</p>}
     </>
   )
 }

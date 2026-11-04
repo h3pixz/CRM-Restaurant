@@ -21,7 +21,7 @@ export function RevenueByCategoryPanel({ entries, revenue }: RevenueByCategoryPa
     >
       <header className="flex items-center justify-between gap-3 border-b border-neutral-100 px-5 py-4">
         <h2 className="text-sm font-semibold text-neutral-900">Revenue by category</h2>
-        <span className="text-xs text-neutral-400">{formatCurrency(revenue)} in total</span>
+        <span className="text-xs text-neutral-500">{formatCurrency(revenue)} in total</span>
       </header>
 
       {revenue === 0 ? (
@@ -40,7 +40,7 @@ export function RevenueByCategoryPanel({ entries, revenue }: RevenueByCategoryPa
                     {ORDER_CATEGORY_LABELS[entry.category]}
                   </span>
                   <span className="flex items-baseline gap-2">
-                    <span className="text-[11px] text-neutral-400">{share}%</span>
+                    <span className="text-[11px] text-neutral-500">{share}%</span>
                     <span className="text-sm font-semibold text-neutral-900">
                       {formatCurrency(entry.total)}
                     </span>

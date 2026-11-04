@@ -1,4 +1,4 @@
-import { Timestamp } from 'firebase/firestore'
+import { Timestamp } from 'firebase/firestore/lite'
 import type { Employee, ShiftType } from '../types/employee'
 
 type EmployeeDocument = Record<string, unknown>

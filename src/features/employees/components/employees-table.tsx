@@ -37,7 +37,7 @@ function EmployeeCard({ employee, onAddBonus }: EmployeeCardProps) {
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
               <p className="truncate text-sm font-medium text-neutral-900">{employee.name}</p>
-              <p className="truncate text-[11px] text-neutral-400">{employee.email}</p>
+              <p className="truncate text-[11px] text-neutral-500">{employee.email}</p>
             </div>
 
             <div className="flex shrink-0 flex-col items-end gap-2">
@@ -57,13 +57,13 @@ function EmployeeCard({ employee, onAddBonus }: EmployeeCardProps) {
 
           <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1 text-[11px]">
             <div>
-              <dt className="text-neutral-400">Employment</dt>
+              <dt className="text-neutral-500">Employment</dt>
               <dd className="mt-0.5 font-medium text-neutral-800">
                 {formatShortDate(employee.employmentDate)}
               </dd>
             </div>
             <div>
-              <dt className="text-neutral-400">Billing</dt>
+              <dt className="text-neutral-500">Billing</dt>
               <dd className="mt-0.5 font-medium text-neutral-800">
                 {formatShortDate(employee.billingDate)}
               </dd>
@@ -143,7 +143,7 @@ export function EmployeesTable({ employees, emptyMessage, onAddBonus }: Employee
                     </Avatar>
                     <div className="leading-tight">
                       <p className="text-sm font-medium text-neutral-900">{employee.name}</p>
-                      <p className="text-[11px] text-neutral-400">{employee.email}</p>
+                      <p className="text-[11px] text-neutral-500">{employee.email}</p>
                     </div>
                   </div>
                 </td>

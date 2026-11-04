@@ -29,7 +29,7 @@ export function TasksList({ tasks, emptyMessage, onToggle }: TasksListProps) {
     <section aria-label="Task list" className="overflow-hidden rounded-2xl border border-neutral-100 bg-card">
       <div className="flex items-center justify-between border-b border-neutral-100 px-5 py-4">
         <h2 className="text-sm font-semibold text-neutral-900">Task list</h2>
-        <span className="text-xs text-neutral-400">{tasks.length} shown</span>
+        <span className="text-xs text-neutral-500">{tasks.length} shown</span>
       </div>
 
       {tasks.length === 0 ? (
@@ -59,7 +59,7 @@ export function TasksList({ tasks, emptyMessage, onToggle }: TasksListProps) {
                     <p
                       className={cn(
                         'min-w-0 flex-1 text-sm font-medium text-neutral-900',
-                        isDone && 'text-neutral-400 line-through',
+                        isDone && 'text-neutral-500 line-through',
                       )}
                     >
                       {task.title}
@@ -92,7 +92,7 @@ export function TasksList({ tasks, emptyMessage, onToggle }: TasksListProps) {
                       {TASK_CATEGORY_LABELS[task.category]}
                     </span>
 
-                    <span className="text-[11px] text-neutral-400">
+                    <span className="text-[11px] text-neutral-500">
                       Due {formatShortDate(task.dueDate)}
                     </span>
 

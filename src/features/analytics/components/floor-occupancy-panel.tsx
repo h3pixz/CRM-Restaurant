@@ -21,7 +21,7 @@ export function FloorOccupancyPanel({ counts, total }: FloorOccupancyPanelProps)
     >
       <header className="flex items-center justify-between gap-3 border-b border-neutral-100 px-5 py-4">
         <h2 className="text-sm font-semibold text-neutral-900">Floor occupancy</h2>
-        <span className="text-xs text-neutral-400">{occupiedShare}% occupied</span>
+        <span className="text-xs text-neutral-500">{occupiedShare}% occupied</span>
       </header>
 
       {total === 0 ? (
@@ -55,7 +55,7 @@ export function FloorOccupancyPanel({ counts, total }: FloorOccupancyPanelProps)
                 <li key={segment.key} className="flex items-center gap-2.5 text-sm">
                   <span aria-hidden="true" className={`size-2 rounded-full ${segment.dotClass}`} />
                   <span className="flex-1 text-neutral-600">{segment.label}</span>
-                  <span className="text-[11px] text-neutral-400">{share}%</span>
+                  <span className="text-[11px] text-neutral-500">{share}%</span>
                   <span className="w-6 text-right text-xs font-semibold text-neutral-900">
                     {counts[segment.key]}
                   </span>
@@ -64,7 +64,7 @@ export function FloorOccupancyPanel({ counts, total }: FloorOccupancyPanelProps)
             })}
           </ul>
 
-          <p className="mt-5 text-[11px] text-neutral-400">{total} tables in total</p>
+          <p className="mt-5 text-[11px] text-neutral-500">{total} tables in total</p>
         </div>
       )}
     </section>

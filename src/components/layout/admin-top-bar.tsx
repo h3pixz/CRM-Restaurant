@@ -29,6 +29,7 @@ export function AdminTopBar({ onOpenNav }: AdminTopBarProps) {
 
         <button
           type="button"
+          aria-label={`Account: ${ADMIN_USER_NAME}`}
           className="group flex min-h-11 min-w-11 items-center justify-center gap-2.5 rounded-md px-1 text-sm font-medium text-neutral-800 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
           <CircleUserRound

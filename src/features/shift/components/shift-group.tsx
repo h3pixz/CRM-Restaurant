@@ -37,7 +37,7 @@ export function ShiftGroup({
           <span aria-hidden="true" className={`size-2 rounded-full ${meta.dotClass}`} />
           <div>
             <h2 className="text-sm font-semibold text-neutral-900">{meta.label}</h2>
-            <p className="mt-0.5 text-[11px] text-neutral-400">{meta.description}</p>
+            <p className="mt-0.5 text-[11px] text-neutral-500">{meta.description}</p>
           </div>
         </div>
 
@@ -70,7 +70,7 @@ export function ShiftGroup({
 
                   <div className="min-w-0">
                     <p className="text-sm font-medium text-neutral-900">{employee.name}</p>
-                    <p className="mt-0.5 truncate text-[11px] text-neutral-400">
+                    <p className="mt-0.5 truncate text-[11px] text-neutral-500">
                       {employee.email}
                     </p>
                   </div>

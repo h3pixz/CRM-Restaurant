@@ -49,7 +49,7 @@ export function HomeShiftPanel({ employees }: HomeShiftPanelProps) {
 
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-medium text-neutral-900">{employee.name}</p>
-                <p className="truncate text-[11px] text-neutral-400">{employee.email}</p>
+                <p className="truncate text-[11px] text-neutral-500">{employee.email}</p>
               </div>
 
               <EmployeeShiftBadge shift={employee.shift} />

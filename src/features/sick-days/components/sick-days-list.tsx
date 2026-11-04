@@ -32,7 +32,7 @@ export function SickDaysList({
     >
       <div className="flex items-center justify-between border-b border-neutral-100 px-5 py-4">
         <h2 className="text-sm font-semibold text-neutral-900">Sick day records</h2>
-        <span className="text-xs text-neutral-400">
+        <span className="text-xs text-neutral-500">
           {records.length} shown · {totalDays} recorded {totalDays === 1 ? 'day' : 'days'}
         </span>
       </div>
@@ -58,7 +58,7 @@ export function SickDaysList({
 
                   <div className="min-w-0">
                     <p className="text-sm font-medium text-neutral-900">{record.employee}</p>
-                    <p className="mt-0.5 text-[11px] text-neutral-400">{record.reason}</p>
+                    <p className="mt-0.5 text-[11px] text-neutral-500">{record.reason}</p>
                   </div>
                 </div>
 
@@ -66,7 +66,7 @@ export function SickDaysList({
                   <p className="text-xs font-medium text-neutral-800">
                     {formatShortDate(record.startDate)} – {formatShortDate(record.endDate)}
                   </p>
-                  <p className="mt-0.5 text-[11px] text-neutral-400">
+                  <p className="mt-0.5 text-[11px] text-neutral-500">
                     {record.days} {record.days === 1 ? 'day' : 'days'}
                   </p>
                 </div>

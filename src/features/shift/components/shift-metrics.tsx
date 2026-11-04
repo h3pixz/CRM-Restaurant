@@ -31,7 +31,7 @@ export function ShiftMetrics({ metrics, activeFilter, onFilterChange }: ShiftMet
               isActive && 'ring-1 ring-neutral-400/70',
             )}
           >
-            <span className="mb-3 text-xs font-semibold text-neutral-500">{metric.label}</span>
+            <span className="mb-3 text-xs font-semibold text-neutral-600">{metric.label}</span>
 
             <div className="mt-2 flex items-center justify-between">
               <div className="flex flex-1 items-center gap-6 pr-6">

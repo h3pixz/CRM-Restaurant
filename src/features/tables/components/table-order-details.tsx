@@ -77,7 +77,7 @@ export function TableOrderDetails({ order }: TableOrderDetailsProps) {
   return (
     <>
       <div className="rounded-2xl border border-neutral-100 bg-card p-6 shadow-sm">
-        <div className="mb-2 hidden grid-cols-12 items-center px-3 pb-3 text-xs font-medium text-neutral-400 lg:grid">
+        <div className="mb-2 hidden grid-cols-12 items-center px-3 pb-3 text-xs font-medium text-neutral-500 lg:grid">
           <span className="col-span-1" />
           <span className="col-span-5">Dish</span>
           <span className="col-span-2">Price</span>
@@ -98,7 +98,7 @@ export function TableOrderDetails({ order }: TableOrderDetailsProps) {
                 >
                   +
                 </span>
-                <span className="text-xs font-semibold tracking-wide text-neutral-400">
+                <span className="text-xs font-semibold tracking-wide text-neutral-500">
                   {CATEGORY_LABELS[group.category]}
                 </span>
               </div>

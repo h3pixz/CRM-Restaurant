@@ -70,7 +70,7 @@ export function HomeRevenuePanel({ orders }: HomeRevenuePanelProps) {
             ))}
           </ul>
 
-          <p className="mt-5 text-[11px] text-neutral-400">
+          <p className="mt-5 text-[11px] text-neutral-500">
             {formatCurrency(revenue)} across all current checks
           </p>
         </div>

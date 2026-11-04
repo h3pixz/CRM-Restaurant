@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, increment, updateDoc } from 'firebase/firestore'
+import { collection, doc, getDocs, increment, updateDoc } from 'firebase/firestore/lite'
 import { firestore } from '@/lib/firebase'
 import type { Employee } from '../types/employee'
 import { mapEmployeeDocument } from './employee-mapper'

@@ -33,7 +33,7 @@ export function VacationList({
     >
       <div className="flex items-center justify-between border-b border-neutral-100 px-5 py-4">
         <h2 className="text-sm font-semibold text-neutral-900">Vacation requests</h2>
-        <span className="text-xs text-neutral-400">{requests.length} shown</span>
+        <span className="text-xs text-neutral-500">{requests.length} shown</span>
       </div>
 
       {requests.length === 0 ? (
@@ -57,7 +57,7 @@ export function VacationList({
 
                   <div className="min-w-0">
                     <p className="text-sm font-medium text-neutral-900">{request.employee}</p>
-                    <p className="mt-0.5 text-[11px] text-neutral-400">
+                    <p className="mt-0.5 text-[11px] text-neutral-500">
                       Requested {formatShortDate(request.submittedAt)}
                     </p>
                     {request.note && (
@@ -70,7 +70,7 @@ export function VacationList({
                   <p className="text-xs font-medium text-neutral-800">
                     {formatShortDate(request.startDate)} – {formatShortDate(request.endDate)}
                   </p>
-                  <p className="mt-0.5 text-[11px] text-neutral-400">
+                  <p className="mt-0.5 text-[11px] text-neutral-500">
                     {request.days} {request.days === 1 ? 'day' : 'days'}
                   </p>
                 </div>

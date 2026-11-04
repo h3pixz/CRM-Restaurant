@@ -78,7 +78,7 @@ export function PayrollTable({ entries, emptyMessage }: PayrollTableProps) {
                   </Avatar>
                   <div className="leading-tight">
                     <p className="text-sm font-medium text-neutral-900">{entry.employee.name}</p>
-                    <p className="text-[11px] text-neutral-400">{entry.employee.email}</p>
+                    <p className="text-[11px] text-neutral-500">{entry.employee.email}</p>
                   </div>
                 </div>
               </td>
@@ -89,7 +89,7 @@ export function PayrollTable({ entries, emptyMessage }: PayrollTableProps) {
 
               <td className="px-4 py-3.5">
                 <p className="text-xs font-medium text-neutral-800">{formatCurrency(entry.base)}</p>
-                <p className="mt-0.5 text-[11px] text-neutral-400">
+                <p className="mt-0.5 text-[11px] text-neutral-500">
                   {PAY_PERIOD_HOURS} h × {formatCurrency(SHIFT_HOURLY_RATES[entry.employee.shift])}
                 </p>
               </td>

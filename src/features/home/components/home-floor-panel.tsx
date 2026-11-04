@@ -70,7 +70,7 @@ export function HomeFloorPanel({ tables }: HomeFloorPanelProps) {
             ))}
           </ul>
 
-          <p className="mt-5 text-[11px] text-neutral-400">{total} tables in total</p>
+          <p className="mt-5 text-[11px] text-neutral-500">{total} tables in total</p>
         </div>
       )}
     </section>
