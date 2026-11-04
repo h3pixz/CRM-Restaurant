@@ -58,7 +58,7 @@ export function LoginPage() {
     <div className="flex min-h-dvh items-center justify-center bg-background px-4 py-10">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <p className="font-logo text-[19px] font-bold tracking-[0.12em] text-neutral-900 uppercase">
+          <p className="font-logo text-[19px] font-bold tracking-[0.12em] text-neutral-900 uppercase cursor-pointer">
             Restaurant CRM
           </p>
           <CardTitle className="mt-2 text-xl">Admin panel</CardTitle>

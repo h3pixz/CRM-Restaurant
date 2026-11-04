@@ -9,7 +9,7 @@ interface AppSidebarNavProps {
 function AppSidebarBrand() {
   return (
     <div className="mb-10 pl-3">
-      <h1 className="font-logo text-[19px] font-bold tracking-[0.12em] text-black uppercase">
+      <h1 className="font-logo text-[19px] font-bold tracking-[0.12em] text-black uppercase cursor-pointer">
         Restaurant CRM
       </h1>
       <div className="mt-4 h-px w-full bg-neutral-300" />

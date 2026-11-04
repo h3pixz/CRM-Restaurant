@@ -18,12 +18,22 @@ interface AdminSidebarNavProps {
   readonly onNavigate?: () => void
 }
 
-function AdminSidebarBrand() {
+interface AdminSidebarBrandProps {
+  readonly onNavigate?: () => void
+}
+
+function AdminSidebarBrand({ onNavigate }: AdminSidebarBrandProps) {
   return (
     <div className="px-2 pb-5">
-      <h1 className="font-logo text-sm font-bold tracking-[0.22em] text-white uppercase">
-        Restaurant CRM
-      </h1>
+      <Link
+        to="/"
+        onClick={onNavigate}
+        className="inline-block rounded-sm cursor-pointer focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:outline-none"
+      >
+        <h1 className="font-logo text-sm font-bold tracking-[0.22em] text-white uppercase">
+          Restaurant CRM
+        </h1>
+      </Link>
       <div className="mt-5 h-px w-full bg-neutral-700/60" />
     </div>
   )
@@ -87,7 +97,7 @@ export function AdminSidebarDrawer({ open, onOpenChange }: AdminSidebarDrawerPro
       className="bg-[#202020] px-4"
       closeClassName="text-neutral-400 hover:bg-white/10 hover:text-white"
     >
-      <AdminSidebarBrand />
+      <AdminSidebarBrand onNavigate={() => onOpenChange(false)} />
       <AdminSidebarNav onNavigate={() => onOpenChange(false)} />
     </NavDrawer>
   )
