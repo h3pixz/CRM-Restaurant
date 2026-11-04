@@ -145,7 +145,7 @@ src/
 
 - Build command: `npm run build`
 - Output directory: `dist`
-- Переменные `VITE_FIREBASE_*` задаются в Project Settings → Environment Variables.
+- Переменные `FIREBASE_*` задаются в Project Settings → Environment Variables.
 
 SPA-роутинг требует rewrite всех путей на `index.html` (конфигурация — `vercel.json`).
 Для GitHub Pages дополнительно понадобились бы `base` в Vite и fallback через `404.html`.
