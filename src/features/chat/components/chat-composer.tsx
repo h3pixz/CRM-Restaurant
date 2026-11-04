@@ -34,7 +34,7 @@ export function ChatComposer({ disabled, onSend }: ChatComposerProps) {
         placeholder={disabled ? 'Connect to send messages' : 'Type a message…'}
         disabled={disabled}
         autoComplete="off"
-        className="h-11 md:h-10"
+        className="h-11 lg:h-10"
       />
       <Button
         type="submit"

@@ -38,7 +38,7 @@ export function RestaurantsSidebar({
                   aria-pressed={isActive}
                   onClick={() => onToggleCuisine(cuisine)}
                   className={cn(
-                    'inline-flex min-h-11 shrink-0 items-center justify-center gap-1 rounded px-2.5 py-0.5 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:outline-none sm:min-h-0 sm:px-1.5',
+                    'inline-flex min-h-11 shrink-0 items-center justify-center gap-1 rounded px-2.5 py-0.5 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:outline-none lg:min-h-0 lg:px-1.5',
                     isActive
                       ? 'bg-white text-gray-800 shadow-sm'
                       : 'text-gray-500 hover:bg-gray-200/60',

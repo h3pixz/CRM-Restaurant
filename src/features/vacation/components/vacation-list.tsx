@@ -86,7 +86,7 @@ export function VacationList({
                     <Button
                       type="button"
                       size="sm"
-                      className="h-11 rounded-md px-3 text-xs md:h-7"
+                      className="h-11 rounded-md px-3 text-xs lg:h-7"
                       onClick={() => onDecide(request.id, 'approved')}
                     >
                       Approve
@@ -95,7 +95,7 @@ export function VacationList({
                       type="button"
                       variant="outline"
                       size="sm"
-                      className="h-11 rounded-md border-neutral-200 px-3 text-xs md:h-7"
+                      className="h-11 rounded-md border-neutral-200 px-3 text-xs lg:h-7"
                       onClick={() => onDecide(request.id, 'declined')}
                     >
                       Decline

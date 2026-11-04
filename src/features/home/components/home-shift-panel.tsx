@@ -26,7 +26,7 @@ export function HomeShiftPanel({ employees }: HomeShiftPanelProps) {
         <h2 className="text-sm font-semibold text-neutral-900">On shift now</h2>
         <Link
           to="/shift"
-          className="inline-flex min-h-11 items-center text-xs font-medium text-neutral-500 transition-colors hover:text-neutral-900 md:min-h-0"
+          className="inline-flex min-h-11 items-center text-xs font-medium text-neutral-500 transition-colors hover:text-neutral-900 lg:min-h-0"
         >
           View shift
         </Link>

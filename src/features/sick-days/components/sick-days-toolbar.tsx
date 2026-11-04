@@ -21,7 +21,7 @@ export function SickDaysToolbar({ search, onSearchChange }: SickDaysToolbarProps
           onChange={(event) => onSearchChange(event.target.value)}
           placeholder="Search by employee or reason"
           aria-label="Search sick day records"
-          className="h-11 rounded-md border-neutral-200 bg-white pr-3 pl-8 text-xs shadow-xs placeholder:text-neutral-400 md:h-8"
+          className="h-11 rounded-md border-neutral-200 bg-white pr-3 pl-8 text-xs shadow-xs placeholder:text-neutral-400 lg:h-8"
         />
       </div>
     </div>

@@ -20,7 +20,10 @@ export function VacationMetrics({
   onFilterChange,
 }: VacationMetricsProps) {
   return (
-    <section aria-label="Vacation statistics" className="mb-7 grid grid-cols-1 gap-6 md:grid-cols-3">
+    <section
+      aria-label="Vacation statistics"
+      className="mb-7 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"
+    >
       {metrics.map((metric) => {
         const isActive = metric.key === activeFilter
 
@@ -48,7 +51,7 @@ export function VacationMetrics({
                 aria-pressed={isActive}
                 onClick={() => onFilterChange(metric.key)}
                 className={cn(
-                  'h-7 rounded-md border-neutral-200/50 bg-white px-4 text-xs font-medium text-neutral-800 shadow-sm hover:bg-neutral-50',
+                  'h-11 rounded-md border-neutral-200/50 bg-white px-4 text-xs font-medium text-neutral-800 shadow-sm hover:bg-neutral-50 lg:h-7',
                   isActive &&
                     'border-neutral-900 bg-neutral-900 text-white hover:bg-neutral-800 hover:text-white',
                 )}

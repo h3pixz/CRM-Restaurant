@@ -20,14 +20,14 @@ export function TableOrderSummary({ total }: TableOrderSummaryProps) {
             type="button"
             variant="outline"
             disabled
-            className="h-11 rounded-lg border-neutral-900 px-5 text-xs font-semibold tracking-wide text-neutral-900 hover:bg-neutral-100 sm:h-9"
+            className="h-11 rounded-lg border-neutral-900 px-5 text-xs font-semibold tracking-wide text-neutral-900 hover:bg-neutral-100 lg:h-9"
           >
             Discount
           </Button>
           <Button
             type="button"
             disabled
-            className="h-11 rounded-lg bg-[#1E242C] px-5 text-xs font-semibold tracking-wide text-white shadow-sm hover:bg-black sm:h-9"
+            className="h-11 rounded-lg bg-[#1E242C] px-5 text-xs font-semibold tracking-wide text-white shadow-sm hover:bg-black lg:h-9"
           >
             Check Order
           </Button>

@@ -13,7 +13,7 @@ export function EmployeesToolbar({ search, onSearchChange }: EmployeesToolbarPro
       <Button
         type="button"
         variant="secondary"
-        className="h-11 shrink-0 gap-2 rounded-md px-3 text-xs font-semibold text-neutral-700 hover:bg-neutral-300/80 md:h-7"
+        className="h-11 shrink-0 gap-2 rounded-md px-3 text-xs font-semibold text-neutral-700 hover:bg-neutral-300/80 lg:h-7"
       >
         <Funnel aria-hidden="true" className="size-3.5 text-neutral-500" strokeWidth={2} />
         Filters
@@ -31,7 +31,7 @@ export function EmployeesToolbar({ search, onSearchChange }: EmployeesToolbarPro
           onChange={(event) => onSearchChange(event.target.value)}
           placeholder="Search by name or email"
           aria-label="Search employees"
-          className="h-11 rounded-md border-neutral-200 bg-white pr-3 pl-8 text-xs shadow-xs placeholder:text-neutral-400 md:h-8"
+          className="h-11 rounded-md border-neutral-200 bg-white pr-3 pl-8 text-xs shadow-xs placeholder:text-neutral-400 lg:h-8"
         />
       </div>
     </div>

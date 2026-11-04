@@ -157,6 +157,15 @@
   font-size: 9px;
 }
 
+@media (max-width: 1023px) {
+  .leaflet-container.leaflet-touch .leaflet-control-zoom a {
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 22px;
+  }
+}
+
 .restaurant-map-tiles {
   filter: grayscale(1) contrast(0.92) brightness(1.06);
 }

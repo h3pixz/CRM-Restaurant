@@ -28,7 +28,7 @@ export function ChatPage() {
               variant="outline"
               size="sm"
               onClick={disconnect}
-              className="h-11 px-4 md:h-8 md:px-3"
+              className="h-11 px-4 lg:h-8 lg:px-3"
             >
               <Unplug aria-hidden="true" />
               Disconnect
@@ -40,7 +40,7 @@ export function ChatPage() {
               size="sm"
               onClick={reconnect}
               disabled={isBusy}
-              className="h-11 px-4 md:h-8 md:px-3"
+              className="h-11 px-4 lg:h-8 lg:px-3"
             >
               <RotateCw aria-hidden="true" className={isBusy ? 'animate-spin' : undefined} />
               {isBusy ? 'Connecting…' : 'Reconnect'}

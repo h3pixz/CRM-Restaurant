@@ -18,7 +18,7 @@ export function ShiftMetrics({ metrics, activeFilter, onFilterChange }: ShiftMet
   return (
     <section
       aria-label="Shift statistics"
-      className="mb-7 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6"
+      className="mb-7 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"
     >
       {metrics.map((metric) => {
         const isActive = metric.key === activeFilter
@@ -47,7 +47,7 @@ export function ShiftMetrics({ metrics, activeFilter, onFilterChange }: ShiftMet
                 aria-pressed={isActive}
                 onClick={() => onFilterChange(metric.key)}
                 className={cn(
-                  'h-11 rounded-md border-neutral-200/50 bg-white px-4 text-xs font-medium text-neutral-800 shadow-sm hover:bg-neutral-50 md:h-7',
+                  'h-11 rounded-md border-neutral-200/50 bg-white px-4 text-xs font-medium text-neutral-800 shadow-sm hover:bg-neutral-50 lg:h-7',
                   isActive &&
                     'border-neutral-900 bg-neutral-900 text-white hover:bg-neutral-800 hover:text-white',
                 )}
