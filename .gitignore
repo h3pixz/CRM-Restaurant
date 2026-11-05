@@ -28,3 +28,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Project defense / Exam Q&A
+DEFENSE_QA.md
