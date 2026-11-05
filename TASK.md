@@ -36,6 +36,7 @@
 ## 4. Остальные экраны
 
 - [x] Home: сводка по смене, занятости зала и выручке (`employees`, `tables`, `orders`)
+- [x] Home: кнопка перехода в каталог ресторанов (`/restaurants`)
 - [x] Restaurants (delivery & pickup): карточки, фильтры и карта на Leaflet (`/restaurants`, вне CRM-лейаута)
 - [x] Shift: смены A/B из `employees`, переключение on shift с оптимистичным обновлением
 - [x] Payroll: база по смене + бонусы и даты биллинга из `employees`

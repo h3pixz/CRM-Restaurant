@@ -1,4 +1,7 @@
 import { useMemo } from 'react'
+import { Link } from '@tanstack/react-router'
+import { UtensilsCrossed } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { StatTiles, type StatTile } from '@/components/stat-tiles'
 import { useEmployeesQuery, type Employee } from '@/features/employees'
 import {
@@ -69,30 +72,42 @@ export function HomePage() {
     void ordersQuery.refetch()
   }
 
-  if (isLoading) {
-    return <HomeLoading />
-  }
-
-  if (firstError) {
-    return (
-      <HomeError
-        message={
-          firstError instanceof Error ? firstError.message : 'Unexpected error while loading data.'
-        }
-        onRetry={handleRetry}
-      />
-    )
-  }
-
   return (
     <>
-      <StatTiles ariaLabel="Restaurant overview" tiles={metrics} className="xl:grid-cols-4" />
-
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <HomeShiftPanel employees={employees} />
-        <HomeFloorPanel tables={tables} />
-        <HomeRevenuePanel orders={orders} />
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <p className="text-xs font-semibold tracking-wider text-neutral-500 uppercase">
+          Overview
+        </p>
+        <Button asChild className="h-11 lg:h-9">
+          <Link to="/restaurants">
+            <UtensilsCrossed aria-hidden="true" className="size-4" />
+            Restaurants
+          </Link>
+        </Button>
       </div>
+
+      {isLoading && <HomeLoading />}
+
+      {firstError && (
+        <HomeError
+          message={
+            firstError instanceof Error ? firstError.message : 'Unexpected error while loading data.'
+          }
+          onRetry={handleRetry}
+        />
+      )}
+
+      {!isLoading && !firstError && (
+        <>
+          <StatTiles ariaLabel="Restaurant overview" tiles={metrics} className="xl:grid-cols-4" />
+
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+            <HomeShiftPanel employees={employees} />
+            <HomeFloorPanel tables={tables} />
+            <HomeRevenuePanel orders={orders} />
+          </div>
+        </>
+      )}
     </>
   )
 }
